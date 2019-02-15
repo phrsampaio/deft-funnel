@@ -41,7 +41,7 @@ Philippe L. Toint, Serge Gratton and Anke Troeltzsch.
 ## License
 
 This software is released under the MIT license. 
-See 'DEFT-FUNNEL License.txt' for more info.
+See `DEFT-FUNNEL License.txt` for more info.
 
 # Using DEFT-FUNNEL without multi-start
 
@@ -57,44 +57,44 @@ Then call DEFT-FUNNEL at the Matlab command window by typing:
 
 **Mandatory input:**
 
-* obj_function : a function handle pointing to the function to be minimized
+* *obj_function* : a function handle pointing to the function to be minimized
 
-* constraints  : a function handle pointing to contraint functions
+* *constraints*  : a function handle pointing to contraint functions
 
-* x0           : initial guess
+* *x0*           : initial guess
 
-* nbcons       : number of constraints (bound constraints not included)
+* *nbcons*       : number of constraints (bound constraints not included)
 
 **Optional input:**
 
-* lsbounds     : vector of lower bounds for the constraints
+* *lsbounds*     : vector of lower bounds for the constraints
 
-* usbounds     : vector of upper bounds for the constraints
+* *usbounds*     : vector of upper bounds for the constraints
 
-* lxbounds     : vector of lower bounds for the x variables
+* *lxbounds*     : vector of lower bounds for the x variables
 
-* uxbounds     : vector of upper bounds for the x variables
+* *uxbounds*     : vector of upper bounds for the x variables
 
-* maxeval      : maxinum number of evaluations (default: 500*n)
+* *maxeval*      : maxinum number of evaluations (default: 500*n)
 
 **More parameters:** see deft_funnel_set_parameters.m
 
 **Output:**
 
-* x            : the best approximation found to a local minimizer,
+* *x*            : the best approximation found to a local minimizer,
 
-* fx           : the value of the objective function at x,
+* *fx*           : the value of the objective function at x,
 
-* mu           : local estimates for the Lagrange multipliers
+* *mu*           : local estimates for the Lagrange multipliers
 
-* indicators   : feasibility and optimiality indicators
+* *indicators*   : feasibility and optimiality indicators
 
-* evaluations  : number of calls to the objective function and constraints
+* *evaluations*  : number of calls to the objective function and constraints
 
-* iterate      : info related to the best point found as well as
+* *iterate*      : info related to the best point found as well as
                the coordinates of all past iterates
                
-* exit_algo    : output signal (0: terminated with success; -1: terminated with errors)
+* *exit_algo*    : output signal (0: terminated with success; -1: terminated with errors)
 
 ## Examples of usage:
 
@@ -146,45 +146,45 @@ deft_funnel_multistart( @obj_function, @constraints, n, nbcons )
 
 **Mandatory input:**
 
-* obj_function : a function handle pointing to the function to be minimized
+* *obj_function* : a function handle pointing to the function to be minimized
 
-* constraints  : a function handle pointing to contraint functions
+* *constraints*  : a function handle pointing to contraint functions
 
-* n            : number of decision variables
+* *n*            : number of decision variables
 
-* nbcons       : number of constraints (bound constraints not included)
+* *nbcons*       : number of constraints (bound constraints not included)
 
 No starting point is required from the user in the multi-start case.
 
 **Optional input:**
 
-* lsbounds          : vector of lower bounds for the constraints
+* *lsbounds*          : vector of lower bounds for the constraints
 
-* usbounds          : vector of upper bounds for the constraints
+* *usbounds*          : vector of upper bounds for the constraints
 
-* lxbounds          : vector of lower bounds for the x variables
+* *lxbounds*          : vector of lower bounds for the x variables
 
-* uxbounds          : vector of upper bounds for the x variables
+* *uxbounds*          : vector of upper bounds for the x variables
 
-* maxeval           : maxinum number of evaluations (default: 5000*n)
+* *maxeval*           : maxinum number of evaluations (default: 5000*n)
 
-* maxeval_ls        : maximum number of evaluations per local search (default: maxeval*0.7)
+* *maxeval_ls*        : maximum number of evaluations per local search (default: maxeval*0.7)
 
-* f_global_optimum  : known objective function value of the global optimum
+* *f_global_optimum*  : known objective function value of the global optimum
 
 **Output:**
 
-* best_sol          : best feasible solution found
+* *best_sol*          : best feasible solution found
 
-* best_fval         : objective function value of ´best_sol´
+* *best_fval*         : objective function value of ´best_sol´
 
-* best_indicators   : indicators of ´best_sol´
+* *best_indicators*   : indicators of ´best_sol´
 
-* total_eval        : number of evaluations used
+* *total_eval*        : number of evaluations used
 
-* nb_local_searches : number of local searches done
+* *nb_local_searches* : number of local searches done
 
-* fX                : objctive function values of all local minima found
+* *fX*                : objctive function values of all local minima found
 
 ## Examples of usage:
 
