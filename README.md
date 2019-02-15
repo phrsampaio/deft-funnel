@@ -2,14 +2,15 @@
 
 This solver searches for the global optimum of the following problem:
 
-\[
-\begin{array}{cc}
-  \displaystyle\min_x    & f(x) \\
-  $s.t.:$ & l^s \leq c(x) \leq u^s, \\
-          & l^x \leq x \leq u^x, \\
-\end{array}
-\]
-where $f: \Re^n \mapsto \Re$ and $c: \Re^n \mapsto \Re^m$ are black boxes.
+$`\displaystyle\min_x f(x)`$ 
+
+subject to: 
+
+$`l^s \leq c(x) \leq u^s`$, 
+
+$`l^x \leq x \leq u^x`$,
+
+where $`f: \Re^n \mapsto \Re`$ and $`c: \Re^n \mapsto \Re^m`$ are black boxes.
 
 It builds local (at most fully quadratic) interpolation models
 from known function values for the objective and constraint functions.
@@ -31,17 +32,15 @@ sampaio.phillipe at gmail.com
 
 ## Main references:
 
-* Ph. L. Sampaio and Ph. L. Toint,"Numerical experience with a derivative-free trust-funnel 
-method for nonlinear optimization problems with general 
-nonlinear constraints",
-Optimization Methods and Software, 31(3), pages 511-534, 2016.
+* [Ph. L. Sampaio and Ph. L. Toint, 
+"Numerical experience with a derivative-free trust-funnel method for nonlinear optimization problems with general nonlinear constraints", Optimization Methods and Software, 31(3), pages 511-534, 2016.](https://www.tandfonline.com/doi/abs/10.1080/10556788.2015.1135919)
 
-* Ph. L. Sampaio and Ph. L. Toint,
-"A derivative-free trust-funnel method
-for equality-constrained nonlinear optimization",
-Computational Optimization and Applications, 61(1), pages 25-49, 2015.
+* [Ph. L. Sampaio and Ph. L. Toint, 
+"A derivative-free trust-funnel method for equality-constrained nonlinear optimization", Computational Optimization and Applications, 61(1), pages 25-49, 2015.](https://doi.org/10.1007/s10589-014-9715-3)
 
-## Contributors: Philippe L. Toint, Serge Gratton and Anke Troeltzsch.
+## Contributors: 
+
+Philippe L. Toint, Serge Gratton and Anke Troeltzsch.
 
 ## License
 
@@ -62,32 +61,45 @@ Then call DEFT-FUNNEL at the Matlab command window by typing:
 
 ## Input/output
 
-**MANDATORY INPUT:**
+**Mandatory input:**
 
 obj_function : a function handle pointing to the function to be minimized
+
 constraints  : a function handle pointing to contraint functions
+
 x0           : initial guess
+
 nbcons       : number of constraints (bound constraints not included)
 
-**OPTIONAL INPUT:**
+**Optional input:**
 
 lsbounds     : vector of lower bounds for the constraints
+
 usbounds     : vector of upper bounds for the constraints
+
 lxbounds     : vector of lower bounds for the x variables
+
 uxbounds     : vector of upper bounds for the x variables
+
 maxeval      : maxinum number of evaluations (default: 500*n)
 
-**MORE PARAMETERS:** see deft_funnel_set_parameters.m
+**More parameters:** see deft_funnel_set_parameters.m
 
-**OUTPUT:**
+**Output:**
 
 x            : the best approximation found to a local minimizer,
+
 fx           : the value of the objective function at x,
+
 mu           : local estimates for the Lagrange multipliers
+
 indicators   : feasibility and optimiality indicators
+
 evaluations  : number of calls to the objective function and constraints
+
 iterate      : info related to the best point found as well as
                the coordinates of all past iterates
+               
 exit_algo    : output signal (0: terminated with success; -1: terminated with errors)
 
 ## Examples of usage:
@@ -140,32 +152,46 @@ deft_funnel_multistart( @obj_function, @constraints, n, nbcons )
 
 ## Input/output
 
-**MANDATORY INPUT:**
+**Mandatory input:**
 
 obj_function : a function handle pointing to the function to be minimized
+
 constraints  : a function handle pointing to contraint functions
+
 n            : number of decision variables
+
 nbcons       : number of constraints (bound constraints not included)
 
 No starting point is required from the user in the multi-start case.
 
-**OPTIONAL INPUT:**
+**Optional input:**
 
 lsbounds          : vector of lower bounds for the constraints
+
 usbounds          : vector of upper bounds for the constraints
+
 lxbounds          : vector of lower bounds for the x variables
+
 uxbounds          : vector of upper bounds for the x variables
+
 maxeval           : maxinum number of evaluations (default: 5000*n)
+
 maxeval_ls        : maximum number of evaluations per local search (default: maxeval*0.7)
+
 f_global_optimum  : known objective function value of the global optimum
 
-**OUTPUT:**
+**Output:**
 
 best_sol          : best feasible solution found
+
 best_fval         : objective function value of ´best_sol´
+
 best_indicators   : indicators of ´best_sol´
+
 total_eval        : number of evaluations used
+
 nb_local_searches : number of local searches done
+
 fX                : objctive function values of all local minima found
 
 ## Examples of usage:
