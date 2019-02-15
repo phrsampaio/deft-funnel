@@ -2,15 +2,11 @@
 
 This solver searches for the global optimum of the following problem:
 
-$`\displaystyle\min_x f(x)`$ 
-
-subject to: 
-
-$`l^s \leq c(x) \leq u^s`$, 
-
-$`l^x \leq x \leq u^x`$,
-
-where $`f: \Re^n \mapsto \Re`$ and $`c: \Re^n \mapsto \Re^m`$ are black boxes.
+min f(x)  
+subject to:   
+ls <= c(x) <= us,  
+lx <=   x  <= ux,  
+where f(x) and c(x)=(c_1(x), ..., c_m(x)) are considered as black boxes.
 
 It builds local (at most fully quadratic) interpolation models
 from known function values for the objective and constraint functions.
@@ -26,12 +22,9 @@ the SQP algorithm.
 
 ## Author and maintainer: 
 
-Phillipe R. Sampaio
-
-Veolia Research and Innovation (VERI)
-
+Phillipe R. Sampaio  
+Veolia Research and Innovation (VERI)  
 sampaio.phillipe at gmail.com
-
 
 ## Main references:
 
