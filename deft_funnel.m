@@ -233,6 +233,10 @@ else
    disp([' Local search number: ', int2str(setting.multistart_call)])
 end
 
+if ( setting.multistart_call == 1 )
+    asdasd
+end
+
 % Check the bounds and correct intial Delta if there is no sufficient space 
 % between the bounds. Shift x0 if is out of the box.
 disp(' ')

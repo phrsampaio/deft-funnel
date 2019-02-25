@@ -271,9 +271,11 @@ for k = 1:maxit
                   'multistart_call', nb_local_searches,                     ...
                   'maxeval' , min(maxeval_ls, maxeval - total_eval));
             catch
-                warning(['Attempt to search for a local optimum '...
-                'unsuccessful. Skipping the current starting point.']);
+                disp(' ')
+                disp([' Local search number ', int2str(nb_local_searches), ' FAILED.'])
+                disp(' Trying the next starting point.');
                 exit_algo = 1;
+                evaluations.nfeval = 0;
             end
               
             if ( exit_algo == 0 ) % no errors found
