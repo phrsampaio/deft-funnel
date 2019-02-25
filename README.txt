@@ -43,7 +43,8 @@
 %   This software is released under the MIT license. 
 %   See 'DEFT-FUNNEL License.txt' for more info.
 %
-%   Contributors: Philippe L. Toint, Serge Gratton and Anke Troeltzsch.
+%   Contributors: Philippe L. Toint (UNamur), Serge Gratton (CERFACS) and 
+%   Anke Troeltzsch (German Aerospace Center, DLR).
 %
 %   *************************************************************************
 %

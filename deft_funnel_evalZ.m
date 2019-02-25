@@ -14,7 +14,7 @@ function Z = deft_funnel_evalZ( X, q )
 %                  x(1)*x(3) ... x(n-2)*x(n)
 % etc.
 %
-% INPUTS:
+% Input:
 %   - X          : the matrix whose columns contains the points at which the 
 %                  monomials should be evaluated.
 %   - q          : the number of monomials considered (q <= (n+1)*(n+2)/2)

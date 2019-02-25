@@ -4,10 +4,10 @@ function values = deft_funnel_evalL( sampleSet, x, setting, choice_set )
 % Desc: Computes the values of the Lagrange polynomials at x.
 %
 % Input:
-%   - sampleSet  : structure of the sample set
-%   - x          : the point at which the model must be evaluated
-%   - setting    : structure of the set of parameters
-%   - choice_set : the indices (of Y's columns) for which to calculate the 
+%   - sampleSet  : struct of the sample set
+%   - x          : the point at which the polynomial must be evaluated
+%   - setting    : struct of parameters
+%   - choice_set : indices (of Y's columns) for which to calculate the 
 %                  Lagrange polynomial values
 %
 % Output:

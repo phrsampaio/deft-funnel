@@ -14,9 +14,9 @@ function P = deft_funnel_computeP( sampleSet, funY, setting )
 % etc.
 %
 % Input:
-%   - sampleSet : the structure of the sample set
+%   - sampleSet : struct of the sample set
 %   - funY      : values of the interpolated function at the points in Y
-%   - setting   : the structure of the set of parameters
+%   - setting   : struct of parameters
 %
 % Output:
 %
@@ -27,7 +27,6 @@ function P = deft_funnel_computeP( sampleSet, funY, setting )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [ n , p1 ] = size(sampleSet.Y);
-badcond = 0;
 q = ( ( n + 1 ) * ( n + 2 ) ) / 2;
 
 if ( setting.whichmodel == 3 && p1 < q )
@@ -44,7 +43,7 @@ if ( setting.whichmodel == 0 )
    % Build (sub-basis) model (p1 = q) 
    % (sampleSet.QZ and sampleSet.RZ are the factors of Z = M')
    warning off
-   P        = ( sampleSet.QZ * ( sampleSet.RZ' \ funY' ) )';
+   P = ( sampleSet.QZ * ( sampleSet.RZ' \ funY' ) )';
 
 elseif ( setting.whichmodel == 1 )
 
@@ -69,7 +68,7 @@ elseif ( setting.whichmodel == 1 )
       rhs = [ funY zeros(1,n+1) ];
 
       warning off
-      mualpha    = ( sampleSet.RZ \ ( sampleSet.QZ' * rhs' ) )';
+      mualpha  = ( sampleSet.RZ \ ( sampleSet.QZ' * rhs' ) )';
 
       % Constant and linear part of P
       P(1:n+1) = mualpha( p1+1: p1+n+1 )';
@@ -105,7 +104,7 @@ elseif ( setting.whichmodel == 3 )
    % Take pseudo-inverse for solving the system because the result
    % is different from using backslash-operator (except for p1==q)
    warning off
-   P        = ( pinv(sampleSet.RZ) *  sampleSet.QZ' * funY' )';
+   P        = ( pinv(sampleSet.RZ) * sampleSet.QZ' * funY' )';
    
 end
 

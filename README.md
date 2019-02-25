@@ -36,12 +36,13 @@ sampaio.phillipe at gmail.com
 
 ## Contributors: 
 
-Philippe L. Toint, Serge Gratton and Anke Troeltzsch.
+Philippe L. Toint (UNamur), Serge Gratton (CERFACS) and 
+Anke Troeltzsch (German Aerospace Center, DLR).
 
 ## License
 
 This software is released under the MIT license. 
-See `DEFT-FUNNEL License.txt` for more info.
+See `License.txt` for more info.
 
 # Using DEFT-FUNNEL without multi-start
 

@@ -1,7 +1,7 @@
 function [ x0, nbcons, ls, us, lx, ux ] = deft_funnel_init( nprob )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Function called by 'run_deft_funnel.m' and used for running DEFT-FUNNEL
+% Desc: Function called by 'run_deft_funnel.m' and used for running DEFT-FUNNEL
 % on a collection of test problems. It sets the entry parameters of the
 % test problem and defines if a constraint in 'deft_funnel_problem_cons.m'
 % is an equality of an inequality through the lower bounds 'ls' and 
@@ -10,7 +10,7 @@ function [ x0, nbcons, ls, us, lx, ux ] = deft_funnel_init( nprob )
 
 if ( nprob == 1 )
 
-    % HS6
+    % Problem: HS6
     x0      = [ -1.2 1 ];
     nbcons  = 1;
     ls      = 0;
@@ -20,7 +20,7 @@ if ( nprob == 1 )
 
 elseif ( nprob == 2 )
 
-    % HS7
+    % Problem: HS7
     x0      = [ 2 2 ];
     nbcons  = 1;
     ls      = 0;
@@ -30,7 +30,7 @@ elseif ( nprob == 2 )
 
 elseif ( nprob == 3 )
 
-    % HS9
+    % Problem: HS9
     x0     = [ 0 0 ];
     nbcons = 1;
     ls     = 0;
@@ -40,7 +40,7 @@ elseif ( nprob == 3 )
 
 elseif ( nprob == 4 )
 
-    % HS10
+    % Problem: HS10
     x0     = [ -10 10 ];
     nbcons = 1;
     ls     = 0;
@@ -50,7 +50,7 @@ elseif ( nprob == 4 )
 
 elseif ( nprob == 5 )
 
-    % HS12
+    % Problem: HS12
     x0     = [ 0 0 ];
     nbcons = 1;
     ls     = 0;
@@ -60,7 +60,7 @@ elseif ( nprob == 5 )
 
 elseif ( nprob == 6 )
 
-    % HS13
+    % Problem: HS13
     x0     = [ -2 -2 ];
     nbcons = 1;
     ls     = 0;
@@ -70,7 +70,7 @@ elseif ( nprob == 6 )
 
 elseif ( nprob == 7 )
 
-    % HS21
+    % Problem: HS21
     x0     = [ -1 -1 ];
     nbcons = 1;
     ls     = 0.0;
@@ -80,7 +80,7 @@ elseif ( nprob == 7 )
 
 elseif ( nprob == 8 )
 
-    % HS23
+    % Problem: HS23
     x0     = [ 3 1 ];
     nbcons = 5;
     ls     = [ 0 0 0 0 0 ];
@@ -90,7 +90,7 @@ elseif ( nprob == 8 )
 
 elseif ( nprob == 9 )
 
-    % BT1
+    % Problem: BT1
     x0     = [0.08 0.06];
     nbcons = 1;
     ls     = 0;
@@ -100,7 +100,8 @@ elseif ( nprob == 9 )
 
 elseif ( nprob == 10 )
 
-    % HANDBOOK - QUADRATICALLY CONSTRAINED TEST PROB 3
+    % Problem: Test problem 3 in "Quadratically Constrained Problems" section of
+    % "Handbook of test problems in local and Global Optimization"
     %x0     = [1 1 1 0 1 0];
     x0     = [ 0.177468345583169 0.400230345036942 4.93626491163683 0.0650223791902058 3.82581226100484 7.18570456709047 ];
     nbcons = 5;
