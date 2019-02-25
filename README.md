@@ -124,11 +124,11 @@ A collection of tests may be run through run_deft_funnel.m by typing
 
 at the Matlab command window. run_deft_funnel.m makes use of 3 files that
 describe each of the test problems:
-1. deft_funnel_init.m (entry parameters), 
+1. deft_funnel_problem_init.m (entry parameters), 
 2. deft_funnel_problem_obj.m (objective function) 
 3. deft_funnel_problem_cons.m (constraint function(s)).
 
-The file deft_funnel_init.m also defines if a constraint in 
+The file deft_funnel_problem_init.m also defines if a constraint in 
 deft_funnel_problem_cons.m is an equality or an inequality through 
 the lower bounds 'ls' and the upper bounds 'us'.
 
@@ -194,7 +194,7 @@ The following problems are included in this package:
 >> [ best_sol, best_fval, best_indicators, total_eval, nb_local_searches, fX ] = ...
 deft_funnel_multistart( @problem_handbook_quadcons_pb3_obj,                      ...
 @problem_handbook_quadcons_pb3_cons, 6, 5,                                       ...
-'lsbounds', [ 4 4 -Inf -Inf 2], 'usbounds', [ Inf Inf 2 2 6 ],                  ...
+'lsbounds', [ 4 4 -Inf -Inf 2], 'usbounds', [ Inf Inf 2 2 6 ],                   ...
 'lxbounds', [ 0 0 1 0 1 0 ], 'uxbounds', [ Inf Inf 5 6 5 10 ])
 
 >> [ best_sol, best_fval, best_indicators, total_eval, nb_local_searches, fX ] = ...
