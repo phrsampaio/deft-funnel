@@ -226,6 +226,13 @@ Delta_c = Delta_c0;
 Delta = min( Delta_f, Delta_c );
 Deltamax = setting.factor_Dmax * Delta;
 
+if ( setting.multistart_call <= 1 )
+    deft_funnel_print_banner( setting );
+else
+   disp(' ')
+   disp([' Local search number: ', int2str(setting.multistart_call)])
+end
+
 % Check the bounds and correct intial Delta if there is no sufficient space 
 % between the bounds. Shift x0 if is out of the box.
 disp(' ')
@@ -236,6 +243,7 @@ for j=1:n
         msg  = [ ' DEFT-FUNNEL error: Lower bound of component ',           ...
                  int2str( j ), ' exceeds upper bound !!' ];
         disp( msg )
+        exit_algo = 1;
         return
     end
     
@@ -250,8 +258,10 @@ for j=1:n
             vstatus( j )      = const.alwaysfixed;
         else
             Delta = 0.5 * temp( j );
-            disp( [ ' Diff. between lower and upper bound of component ',   ...
-                    int2str( j ), ' is less than 2*Delta0 !! New Delta0=',  ...
+            [ Delta_f, Delta_c ] = deal( Delta );
+            
+            disp( [ ' Diff. between lower and upper bound of component ',        ...
+                    int2str( j ), ' is less than 2*Delta0! New Delta0 set to ', ...
                     num2str( Delta ) ] );
         end
     end
@@ -282,8 +292,9 @@ end
 if ( iterate.nfix > 0 )
     nfree = iterate.fulldim - iterate.nfix;
     if ( nfree <= 0 )
-        msg = ' DEFT-FUNNEL error: No free variables. Please, enlarge search space!';
+        msg = ' DEFT-FUNNEL error: No free variables. Please, enlarge search space.';
         disp( msg );
+        exit_algo = 1;
         return
     end
     iterate.indfree = setdiff( 1:iterate.fulldim, iterate.indfix );
@@ -310,12 +321,6 @@ else
     iterate.indfree = 1:iterate.fulldim;
 end
 
-if ( setting.multistart_call <= 1 )
-    deft_funnel_print_banner( setting );
-else
-   disp([' Local search number: ', int2str(setting.multistart_call)])
-end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%      BUILDING THE INTIAL POISED SAMPLE SET      %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -326,7 +331,7 @@ end
 
 if ( strcmp( msg(2:6), 'Error' ) )
     disp(' ')
-    disp(' !!!!! ERROR IN THE CONSTRUCTION OF THE INITIAL SAMPLE SET !!!!!' )
+    disp(' DEFT-FUNNEL error: Construction of initial sample set unsuccessful.' )
     x = iterate.x;
     fx = iterate.feval;
     mu = NaN;
@@ -419,7 +424,7 @@ setting.epsilon_i = setting.epsilon0;
 % Print the information obtained after computing the first model
 deft_funnel_print_head_info( setting );
 deft_funnel_printout( nit, evaluations, iterate, setting, ...
-    indicators, vmax, 0.0, 0.0, 0.0, 0.0, '', '', sampleSet.errg );
+    indicators, vmax, 0.0, 0.0, Delta, 0.0, '', '', sampleSet.errg );
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%      CALL MAIN ROUTINE      %%%%%%%%%%%%%%%%%%%%%%%%%%%
