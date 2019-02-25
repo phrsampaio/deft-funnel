@@ -1,4 +1,4 @@
-function [ x0, nbcons, ls, us, lx, ux ] = deft_funnel_init( nprob )
+function [ x0, nbcons, ls, us, lx, ux ] = deft_funnel_problem_init( nprob )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Function called by 'run_deft_funnel.m' and used for running DEFT-FUNNEL
