@@ -1,7 +1,8 @@
-function [ Sreduced, mSreduced, asc_order ] = deft_funnel_multistart_best_samples(S, mS, kappa)
+function [ Sreduced, mSreduced, asc_order ] = ...
+           deft_funnel_multistart_best_samples( S, mS, kappa )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Builds a reduced sample set with (kappa * nbsamples) points from S.
+% Desc: Builds a reduced sample set with #(kappa * nbsamples) points from S.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 nbsamples = size(S, 2);

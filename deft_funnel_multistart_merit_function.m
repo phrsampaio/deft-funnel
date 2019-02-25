@@ -1,4 +1,5 @@
-function [ merit_fun_S, cons_viol_S ] = deft_funnel_multistart_merit_function(S, fS, cS, ls, us)
+function [ merit_fun_S, cons_viol_S ] = ...
+           deft_funnel_multistart_merit_function( S, fS, cS, ls, us )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the merit function value and the constraint vioation of every 

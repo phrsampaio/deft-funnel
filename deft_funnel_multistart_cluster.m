@@ -1,7 +1,8 @@
-function output = deft_funnel_multistart_cluster(S, mS, index, radius)
+function output = deft_funnel_multistart_cluster( S, mS, index, radius )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Checks if there is a neighbor with better merit function value.
+% Desc: Checks if there is a neighbor S(i) to S(index) with better merit 
+% function value (1 if yes and 0 otherwise).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 nbsamples = size(S, 2);
