@@ -30,8 +30,9 @@ end
 
 if ( verbose > 0 )
     disp( ' ' )
-    disp( ' **********************************************' )
-    disp( [ ' **** Identifying active bounds. nfree = ', num2str( n ) ' ****' ]);
+    disp( ' ********* deft_funnel_ident_active_bnds *********' )  
+    disp( [ ' *** nfree = ', num2str( n )] );
+    disp( ' *** Searching for new active bounds' )
 end
 
 % Initiate new subspace
@@ -79,9 +80,8 @@ I_LandU = [ I_L I_U ];
 if ( isempty( I_LandU ) ) 
    msg = ' No active bounds';
    if ( verbose > 0 )
-      disp( ' ' )
-      disp( ' **** No active bounds were found ****' )
-      disp( ' *************************************' )
+      disp( ' *** No active bounds were found' )
+      disp( ' *** return from deft_funnel_ident_active_bnds ***' )
       disp( ' ' )
    end
    return
@@ -105,14 +105,11 @@ for i = 1:size( sspace_save, 2 )
           (sampleSet.i_xbest == xspace_save( 1, i ) ||                      ...
            sampleSet.i_xbest == xspace_save( 2, i ) ) )
     
-      msg = ' Subspace already explored';
+      msg = ' *** Subspace already explored';
       xspace_save( 3, i ) = 1;
       if ( verbose > 0 )
-         disp( ' ' )
          disp( msg )
-         disp( ' ' )
-         disp( ' **** Return from ident_active_bounds *****' )
-         disp( ' ******************************************' )
+         disp( ' *** return from deft_funnel_ident_active_bnds ***' )
          disp( ' ' )
       end
       return
@@ -137,14 +134,12 @@ if ( norm( iterate.x - xnew ) > setting.eps_bnd )
       end
    end
    if ( coincides )
-      msg = [ ' Current iterate moved to the bounds ',                      ...
+      msg = [ ' *** Current iterate moved to the bounds ',                      ...
                  'but this point already exists' ]; 
       if ( verbose > 0 )
-         disp( ' ' )
-      	 disp( msg )
+         disp( msg )
          xnew
-         disp( ' **** Return from ident_active_bounds *****' )
-         disp( ' ******************************************' )
+         disp( ' *** return from deft_funnel_ident_active_bnds ***' )
          disp( ' ' )
       end
       return
@@ -161,9 +156,9 @@ if ( norm( iterate.x - xnew ) > setting.eps_bnd )
    % and adjust indices if necessary
    if ( xnewSample.feval < sampleSet.fX( sampleSet.i_xbest ) )      
       if ( verbose > 0 )
-         disp( [' i_xbest: ' num2str( sampleSet.i_xbest ) ] )
-         disp( 'after moving best point to the bounds: ' )
-         disp( [' i_xbest: ' num2str( sampleSet.nbPoints ) ])
+         disp( [' *** i_xbest: ' num2str( sampleSet.i_xbest ) ] )
+         disp( ' *** after moving best point to the bounds: ' )
+         disp( [' *** i_xbest: ' num2str( sampleSet.nbPoints ) ])
       end
       xstatus( sampleSet.nbPoints ) = const.inY;
       sampleSet.i_xbest             = sampleSet.nbPoints;
@@ -173,13 +168,10 @@ if ( norm( iterate.x - xnew ) > setting.eps_bnd )
       iterate                       = xnewSample;
       
    else
-      msg = ' Current iterate moved to the bound but new fvalue not smaller';
+      msg = ' *** Current iterate moved to the bound but new fvalue not smaller';
       if ( verbose > 0 )
-          disp( ' ' )
           disp( msg )
-          disp( ' ' )
-          disp( ' **** Return from ident_active_bounds *****' )
-          disp( ' ******************************************' )
+          disp( ' *** return from deft_funnel_ident_active_bnds ***' )
           disp( ' ' )
       end
       return
@@ -190,13 +182,11 @@ end
 % Return if all bounds active
 if ( length( I_LandU ) == n ) 
 
-   msg = ' All bounds are active';
+   msg = ' *** All bounds are active';
    
    if ( verbose > 0 )
       disp( msg )
-      disp( ' ' )
-      disp( ' **** Return from ident_active_bounds *****' )
-      disp( ' ******************************************' )
+      disp( ' *** return from deft_funnel_ident_active_bnds ***' )
       disp( ' ' )
    end
    return
@@ -247,9 +237,9 @@ else
    ind_inSubspc = find( sstatus >= const.in ); 
     
    if ( verbose > 0 )
-     disp( [ ' Nb. of points at an active bound: ',                         ...
+     disp( [ ' *** Nb. of points at an active bound: ',                         ...
              num2str( length( ind_inSubspc ) ) ] )
-     disp( ' Their indices: ')
+     disp( ' *** Their indices: ')
      ind_inSubspc'
          
    end
@@ -304,10 +294,10 @@ else
    
    if ( verbose > 0 )
       disp( ' ' )
-      disp( [ ' ****** New set of points in subspace (sample set Y) nfree = ',              ...
-              num2str( new_n ), ' ********' ] ) 
+      disp( [ ' *** New set of points in subspace (sample set Y) nfree = ',              ...
+              num2str( new_n )] ) 
       sampleSet.Y
-      disp( ' ****** Computed new model ********' )
+      disp( ' *** Computed new model ' )
    end
    
    it_type = 'entering subspace';
@@ -318,7 +308,7 @@ else
 
    if ( verbose > 0 )
       disp( ' ' )
-      disp( [ ' ****** Solve subspace problem (nfree = ', ...
+      disp( [ ' *** Solve subspace problem (nfree = ', ...
               num2str(new_n) ') ********'])
       disp( ' ##################################################')
    end
@@ -327,7 +317,7 @@ else
    % new points)
    if ( indicators.norm_c_s <= setting.epsilon && indicators.pi_f <= setting.epsilon ) 
       if ( verbose > 0 )
-         disp( ' Problem already converged' )
+         disp( ' *** Problem already converged' )
          disp( ' ' )
       end
    end 
@@ -343,7 +333,7 @@ else
 
    if ( verbose > 0 )
       disp( ' ' )
-      disp( [ ' ****** Exit subspace problem (nfree = ',                     ...
+      disp( [ ' *** Exit subspace problem (nfree = ',                     ...
               num2str(new_n) ') ********'])
       disp( ' ##################################################' )
       disp( ' ' )
@@ -400,9 +390,9 @@ end
 
 if ( verbose > 0 )
   if ( strcmp( level, 'toplevel' ) )
-     fprintf( '\n ****** Build Y in the full space ********' )
+     fprintf( '\n *** Build Y in the full space ********' )
   else
-     fprintf( '\n ****** Build Y in the higher space ********' )
+     fprintf( '\n *** Build Y in the higher space ********' )
   end
   sampleSet.Y
 end
@@ -418,7 +408,7 @@ sampleSet = deft_funnel_build_QR_of_Y( sampleSet, setting );
 sampleSet = deft_funnel_poisedness_Y( sampleSet, iterate, setting );
 
 if ( verbose > 0 )
-  fprintf(' ****** Compute higher dimensional models ********\n\n')
+  fprintf(' *** Compute higher dimensional models ********\n\n')
 end
 
 % Compute necessary information for the new subspace
@@ -440,12 +430,13 @@ if ( ( indicators.norm_c_s > setting.epsilon || indicators.pi_f > setting.epsilo
   [ Delta_c, Delta_f, Delta ] = deal( max( 0.1 * indicators.pi_f, setting.epsilon ) );
 end
 
-msg = ' Identification of active bounds done successfully';
+msg = ' *** Identification of active bounds done successfully';
 
 if ( verbose > 0 )
    disp(msg)
-   fprintf('\n ****** Return from deft_funnel_ident_active_bnds **********\n');
-   disp(' ')
+   disp( ' *** return of deft_funnel_ident_active_bnds **' )
+   disp( ' ' )
+   disp( ' ' )
 end
 
 end % end of deft_funnel_ident_active_bnds

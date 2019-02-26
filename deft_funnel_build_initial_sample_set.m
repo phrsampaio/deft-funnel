@@ -11,8 +11,9 @@ function [ sampleSet, iterate, evaluations, xstatus, sstatus, poised_model, ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if ( setting.verbose >= 2 )
-   disp( ' *** Building initial sample set *** ' )
-   disp( [ ' Degree of the initial  model = ', int2str( setting.cur_degree ) ] )
+   disp( ' *********** deft_funnel_build_initial_sample_set ***********' )
+   disp( ' *** Building initial sample set' )
+   disp( [ ' *** Degree of the initial model = ', int2str( setting.cur_degree ) ] )
 end
 
 % Compute an initial poised interpolation set around the starting point
@@ -115,7 +116,8 @@ sampleSet.i_xbest  = sampleSet.ind_Y( 1 );
 msg = 'Initial sample set successfully built';
 
 if ( setting.verbose >= 2 )
-   disp( ' *** Initial sample set successfully built *** ' )
+   disp( ' *** Initial sample set successfully built' )
+   disp( ' ***** return from deft_funnel_build_initial_sample_set *****' )
 end
 
 end % end of deft_funnel_build_initial_sample_set

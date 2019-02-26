@@ -10,8 +10,9 @@ lambda    = 0;
 [ ~, p1 ] = size( sampleSet.Y );
 
 if ( setting.verbose >= 2 )
-        disp( ' ************************************************************' )
-        disp( ' **** Computing the poisedness of the sample set ****' )
+        disp( ' ' )
+        disp( ' *********** deft_funnel_poisedness_Y ***********' )
+        disp( ' *** Computing the poisedness of the sample set' )
 end
 
 % Compute the radius of the poisedness ball.
@@ -46,9 +47,9 @@ sampleSet.Y_radius = Y_radius;
 sampleSet.errg = sampleSet.lambda * sampleSet.Y_radius;
 
 if ( setting.verbose >= 2 )
-        disp( ' **** Poisedness of the sample set computed successfully ****' )
-        disp( [' Gradient error estimation (sampleSet.errg) =  ', int2str( sampleSet.errg )] )
-        disp( ' ************************************************************' )
+        disp( ' *** Poisedness of the sample set computed successfully' )
+        disp( [' *** Gradient error estimation (sampleSet.errg) =  ', int2str( sampleSet.errg )] )
+        disp( ' ***** return from deft_funnel_poisedness_Y *****' )
         disp( ' ' )
 end
 

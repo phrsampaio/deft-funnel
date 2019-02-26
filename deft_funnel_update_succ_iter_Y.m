@@ -34,7 +34,7 @@ if ( pos > 0 )
     sampleSet.fY( pos )           = iterate_plus.feval;
     sampleSet.cY( :, pos )        = iterate_plus.ceval;
     if ( setting.verbose >= 2 )
-        disp( [' replacement/inclusion of interpolation point at position', ...
+        disp( [' Replacement/inclusion of interpolation point at position ', ...
             int2str( pos ), ' in Y successful'] )
         disp( ' ' )
     end
