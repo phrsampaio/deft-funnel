@@ -19,26 +19,28 @@ n = length( x );
 m = size( J, 1 );
 Im = eye( m );
 In = eye( n );
-
 size_mu = m;
 
+% Define tolerance for active bounds
+tol = 1.0e-12;
+
 % Consider only the active upper s bounds in the computation
-indws = find( abs(s-us) < 1.0e-12 );
+indws = find( abs(s-us) < tol );
 Iws = Im( :, indws );
 size_wsAct = size( Iws, 2 );
 
 % Consider only the active lower s bounds in the computation
-indzs = find( abs(ls-s) < 1.0e-12 );
+indzs = find( abs(ls-s) < tol );
 Izs = -Im( :, indzs );
 size_zsAct = size( Izs, 2 );
 
 % Consider only the active upper x bounds in the computation
-indwx = find( abs(x-ux) < 1.0e-12 );
+indwx = find( abs(x-ux) < tol );
 Iwx = In( :, indwx );
 size_wxAct = size( Iwx, 2 );
 
 % Consider only the active lower x bounds in the computation
-indzx = find( abs(lx-x) < 1.0e-12 );
+indzx = find( abs(lx-x) < tol );
 Izx = -In( :, indzx );
 size_zxAct = size( Izx, 2 );
 

@@ -6,8 +6,8 @@ function [ norm_tstep, tstep, d, d_x, d_s, iterate, indicators ] =          ...
 % Desc: Computes a tangent step if there is enough 'space' left by the normal
 % step and if the optimality measure is relatively large. 
 % It obtains the tangent step by solving
-% 1) a linear problem with 'linprog' if H is nearly a null matrix;
-% 2) a nonlinear problem with the Spectral Projected Gradient method otherwise 
+% (1) a linear problem with 'linprog' if H is nearly a null matrix;
+% (2) a nonlinear problem with the Spectral Projected Gradient method otherwise 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 n = iterate.xdim;

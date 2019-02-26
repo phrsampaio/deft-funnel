@@ -160,7 +160,7 @@ for i = 1:maxit
    %        Compute a Cauchy point using a projected Armijo search.         %
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-   g = A' * res;                                % the quadratic's gradient
+   g = A' * res; % the quadratic's gradient
 
    % Two strategies are available for the computation of the Cauchy point:
    % 1) a simple Armijo backtracking method starting from the stepsize

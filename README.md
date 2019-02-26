@@ -76,7 +76,7 @@ Then call DEFT-FUNNEL at the Matlab command window by typing:
 
 * *uxbounds*     : vector of upper bounds for the x variables
 
-* *maxeval*      : maxinum number of evaluations (default: 500*n)
+* *maxeval*      : maximum number of evaluations (default: 500*n)
 
 **More parameters:** see deft_funnel_set_parameters.m
 
@@ -167,7 +167,7 @@ No starting point is required from the user in the multi-start case.
 
 * *uxbounds*          : vector of upper bounds for the x variables
 
-* *maxeval*           : maxinum number of evaluations (default: 5000*n)
+* *maxeval*           : maximum number of evaluations (default: 5000*n)
 
 * *maxeval_ls*        : maximum number of evaluations per local search (default: maxeval*0.7)
 
