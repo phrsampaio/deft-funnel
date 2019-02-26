@@ -15,10 +15,9 @@ where an active-set method is applied for handling the bound constraints
 and where the convergence is driven by a funnel bound on the constraint 
 violation.
 
-It implements the Multi-level Single Linkage (MLSL) method, which is
-a clustering-based multistart technique for global optimization. The
-MLSL is used to select the starting points of the local searches done by
-the SQP algorithm.
+In order to find the global optimum, it makes use of a clustering-based 
+multi-start technique named Multi-Level Single Linkage (MLSL) to select the 
+starting points of the local searches done by the SQP algorithm.
 
 ## Author and maintainer: 
 
@@ -62,7 +61,7 @@ Then call DEFT-FUNNEL at the Matlab command window by typing:
 
 * *constraints*  : a function handle pointing to contraint functions
 
-* *x0*           : initial guess
+* *x0*           : initial guess (no need to be feasible)
 
 * *nbcons*       : number of constraints (bound constraints not included)
 
