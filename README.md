@@ -27,10 +27,10 @@ sampaio.phillipe at gmail.com
 
 ## Main references:
 
-* [Ph. L. Sampaio and Ph. L. Toint, 
+* [Ph. R. Sampaio and Ph. L. Toint, 
 "Numerical experience with a derivative-free trust-funnel method for nonlinear optimization problems with general nonlinear constraints", Optimization Methods and Software, 31(3), pages 511-534, 2016.](https://www.tandfonline.com/doi/abs/10.1080/10556788.2015.1135919)
 
-* [Ph. L. Sampaio and Ph. L. Toint, 
+* [Ph. R. Sampaio and Ph. L. Toint, 
 "A derivative-free trust-funnel method for equality-constrained nonlinear optimization", Computational Optimization and Applications, 61(1), pages 25-49, 2015.](https://doi.org/10.1007/s10589-014-9715-3)
 
 ## Contributors: 
