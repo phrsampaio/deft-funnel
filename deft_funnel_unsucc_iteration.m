@@ -306,7 +306,6 @@ if ( setting.cur_degree >= modelSize.pquad || pos == 0 )
                 else
 
                     % Shrink trust region in unsuccessful iteration
-
                     if( setting.shrink_Delta == 1 &&                        ...
                         Delta_type_counter < Delta_max_counter  &&          ...
                         Delta_type <= setting.epsilon_i)
@@ -320,7 +319,7 @@ if ( setting.cur_degree >= modelSize.pquad || pos == 0 )
                         end
                     end
                 end
-            end % if ( pos > 0 )
+            end % of 'if ( pos > 0 )'
         end % replace a close point
     end % fully quadratic model 
 

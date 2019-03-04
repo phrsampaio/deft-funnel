@@ -158,7 +158,7 @@ for i = 1:2:noptargs
             maxeval = varargin{ i + 1 };
         else
             msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' multistart entry!' ];
+                    ' maximum number of simulations!' ];
             disp( msg )
         end
         
@@ -168,7 +168,7 @@ for i = 1:2:noptargs
             maxeval_ls = varargin{ i + 1 };
         else
             msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' multistart entry!' ];
+                    ' maximum number of simulations per local search!' ];
             disp( msg )
         end
         
@@ -178,7 +178,7 @@ for i = 1:2:noptargs
             maxeval_ls = varargin{ i + 1 };
         else
             msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' multistart entry!' ];
+                    ' the ojective function value of the global optimum!' ];
             disp( msg )
         end
         
@@ -213,7 +213,7 @@ alpha = alpha * volume_factor^(1.0/n);
 for k = 1:maxit
     
     if ( total_eval >= maxeval )
-        disp(' TERMINATED: maximum budget reached')
+        disp(' TERMINATED: maximum budget reached.')
         disp(' ')
         break
     end
@@ -221,7 +221,7 @@ for k = 1:maxit
     if ( total_eval + nb_of_new_samples > maxeval )
         total_eval
         maxeval
-        disp(' TERMINATED: the remaining budget is not enough to continue')
+        disp(' TERMINATED: the remaining budget is not enough to continue.')
         disp(' ')
         break
     end

@@ -9,24 +9,24 @@ function [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] = deft_funne
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Check the type of mandatory inputs.
-if ( ~isa( f, 'function_handle' ) || ~isa( c, 'function_handle' ) ||      ...
+if ( ~isa( f, 'function_handle' ) || ~isa( c, 'function_handle' ) ||        ...
      ~isnumeric( x0 ) || ~isnumeric( nbcons ) )
     
     if ( ~isa( f, 'function_handle' ) )
-        msg = [ ' DEFT-FUNNEL error: the first argument is not a',        ...
-            ' function handle! Terminating.' ];
+        msg = [ ' DEFT-FUNNEL error: the first argument is not a',          ...
+                ' function handle! Terminating.' ];
     end
     if ( ~isa( c, 'function_handle' ) )
-        msg = [ ' DEFT-FUNNEL error: the second argument is not a',       ...
-            ' function handle! Terminating.' ];
+        msg = [ ' DEFT-FUNNEL error: the second argument is not a',         ...
+                ' function handle! Terminating.' ];
     end
     if ( ~isnumeric( x0 ) )
-        msg = [ ' DEFT-FUNNEL error: the starting point is not a',        ...
-            ' numeric vector! Terminating.' ];
+        msg = [ ' DEFT-FUNNEL error: the starting point is not a',          ...
+                ' numeric vector! Terminating.' ];
     end
     if ( ~isnumeric( nbcons ) )
-        msg = [ ' DEFT-FUNNEL error: the number of constraints is',     ...
-            ' not numeric.' ];
+        msg = [ ' DEFT-FUNNEL error: the number of constraints is',         ...
+                ' not numeric.' ];
     end
     disp( msg )
     return
@@ -60,7 +60,7 @@ if mod( noptargs, 2 ) > 0
    return
 end
 
-%  Set some constants
+% Set some constants
 const.free         = 0;              % Variable free
 const.fixed        = 1;              % Variable fixed
 const.alwaysfixed  = 2;              % Variable always fixed
@@ -203,13 +203,14 @@ for i = 1:2:noptargs
                     ' multistart entry!' ];
             disp( msg )
         end
-        
+    
+    % Maximum number of simulations
     elseif ( strcmp( varargin{ i }, 'maxeval' ) )
         if ( isnumeric( varargin{ i + 1 } ) )
             setting.maxeval = varargin{ i + 1 };
         else
             msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' multistart entry!' ];
+                    ' maximum number of simulations.' ];
             disp( msg )
         end
         
@@ -220,7 +221,7 @@ for i = 1:2:noptargs
     end
 end
 
-%  Compute the maximal TR radius
+% Compute the maximal TR radius
 Delta_f = Delta_f0;
 Delta_c = Delta_c0;
 Delta = min( Delta_f, Delta_c );
@@ -231,10 +232,6 @@ if ( setting.multistart_call <= 1 )
 else
    disp(' ')
    disp([' Local search number: ', int2str(setting.multistart_call)])
-end
-
-if ( setting.multistart_call == 1 )
-    asdasd
 end
 
 % Check the bounds and correct intial Delta if there is no sufficient space 

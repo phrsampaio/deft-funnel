@@ -19,13 +19,13 @@ In order to find the global optimum, it makes use of a clustering-based
 multi-start technique named Multi-Level Single Linkage (MLSL) to select the 
 starting points of the local searches done by the SQP algorithm.
 
-## Author and maintainer: 
+## Author and maintainer 
 
 Phillipe R. Sampaio  
 Veolia Research and Innovation (VERI)  
 sampaio.phillipe at gmail.com
 
-## Main references:
+## Main references
 
 * [Ph. R. Sampaio and Ph. L. Toint, 
 "Numerical experience with a derivative-free trust-funnel method for nonlinear optimization problems with general nonlinear constraints", Optimization Methods and Software, 31(3), pages 511-534, 2016.](https://www.tandfonline.com/doi/abs/10.1080/10556788.2015.1135919)
@@ -33,7 +33,7 @@ sampaio.phillipe at gmail.com
 * [Ph. R. Sampaio and Ph. L. Toint, 
 "A derivative-free trust-funnel method for equality-constrained nonlinear optimization", Computational Optimization and Applications, 61(1), pages 25-49, 2015.](https://doi.org/10.1007/s10589-014-9715-3)
 
-## Contributors: 
+## Contributors 
 
 Philippe L. Toint (UNamur), Serge Gratton (CERFACS) and 
 Anke Troeltzsch (German Aerospace Center, DLR).
@@ -96,7 +96,7 @@ Then call DEFT-FUNNEL at the Matlab command window by typing:
                
 * *exit_algo*    : output signal (0: terminated with success; -1: terminated with errors)
 
-## Examples of usage:
+## Examples of usage
 
 Some of the test problems included in this package are:
 
@@ -186,7 +186,7 @@ No starting point is required from the user in the multi-start case.
 
 * *fX*                : objctive function values of all local minima found
 
-## Examples of usage:
+## Examples of usage
 
 The following problems are included in this package:
 ```
