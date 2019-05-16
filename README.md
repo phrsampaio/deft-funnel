@@ -247,7 +247,7 @@ the second argument must be the string 'combined' as in the examples below:
 deft_funnel( @blackbox, 'combined', x0, nbcons )
 
 >> [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] = ...
-deft_funnel_multistart( @blackbox, 'combined', x0, nbcons )
+deft_funnel_multistart( @blackbox, 'combined', n, nbcons )
 ```
 
 The solver assumes that the first output of @blackbox contains the objective 
