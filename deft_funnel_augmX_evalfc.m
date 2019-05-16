@@ -9,7 +9,9 @@ function [ sampleSet, sample, evaluations, xstatus, sstatus ] =             ...
 %
 % Input:
 %   - f            : objective function handle
-%   - c            : constraints' function handle
+%   - c            : constraints' function handle or string "combined" that
+%                    indicates that the black box returns both objective and 
+%                    contraint functions simultaneously
 %   - sample       : struct of the new point
 %   - sampleSet    : struct of the sample set
 %   - setting      : struct of parameters
@@ -40,7 +42,17 @@ index = sampleSet.nbPoints;
 
 % Set status of the new point
 xstatus(index) = xstatus_val;
-sstatus(index) = 1; % the point is contained in current subspace
+sstatus(index) = 1; % the point is contained in the current subspace
+
+error_msg = [ ' Possible causes:\n', ...
+              ' (1) Hidden constraint: your black-box function might not',  ...
+              ' be able to be evaluated at that point.\n',                  ...
+              ' (2) Function handle: check if the function handle',         ...
+              ' that you have passed as input is correct.\n',               ...
+              ' (3) Black-box function: check if your black-box',           ...
+              ' function does not contain any internal errors.\n',          ...
+              ' Setting output(s) to 1.0e+10. This might affect the',       ...
+              ' final solution.\n\n' ];
 
 % Augment X with full-dimensional y, scale if user-defined and 
 % evaluate f and c at y
@@ -52,42 +64,45 @@ if ( nfix > 0 )
     if ( setting.scaleX )
       samplefull = samplefull ./ setting.scalefacX;
     end
-
-    try
-        fvalue = f(samplefull);
-    catch
-        disp(' ')
-        disp( ' Error: evaluation of objective function FAILED at the point');
-        samplefull
-        disp( ' Possible causes:' )
-        disp([ ' (1) Hidden constraint: your black-box function might not be able to be evaluated', ...
-               ' at that point.' ] );
-        disp([ ' (2) Function handle: check if the function handle', ...
-               ' that you have passed as input is correct.'] );
-        disp([ ' (3) Black-box function: check if your black-box', ...
-               ' function does not contain any internal errors.'] );
-        disp( ' Setting fvalue = 1.0e+10. This might affect the final solution.' );
-        disp(' ')
-        fvalue = 1.0e+10;
-    end
-
-    try
-        cvalue = c(samplefull);
-    catch
-        disp(' ')
-        disp(' Error: evaluation of constraint function FAILED at the point' );
-        samplefull
-        disp( ' Possible causes:' )
-        disp([ ' (1) Hidden constraint: your black-box function might not be able to be evaluated', ...
-               ' at that point.' ] );
-        disp([ ' (2) Function handle: check if the function handle', ...
-               ' that you have passed as input is correct.'] );
-        disp([ ' (3) Black-box function: check if your black-box', ...
-               ' function does not contain any internal errors.'] );
-        disp( ' Setting cvalue = 1.0e+10*ones(m,1). This might affect the final solution.' );
-        disp(' ')
-        cvalue = 1.0e+10 * ones( sample.sdim, 1 );
-    end
+    
+    if ( strcmp( c, 'combined' ) )
+        
+        try
+            output = f(samplefull);
+            fvalue = output(1);
+            cvalue = output(2:sample.sdim+1);
+        catch
+            disp(' ')
+            disp( ' Error: evaluation of the black box FAILED at the point');
+            samplefull
+            fprintf(error_msg);
+            fvalue = 1.0e+10;
+            cvalue = 1.0e+10 * ones( sample.sdim, 1 );
+        end
+        
+    else
+        
+        try
+            fvalue = f(samplefull);
+        catch
+            disp(' ')
+            disp(' Error: evaluation of objective function FAILED at the point' );
+            samplefull
+            fprintf(error_msg);
+            fvalue = 1.0e+10;
+        end
+        
+        try
+            cvalue = c(samplefull);
+        catch
+            disp(' ')
+            disp(' Error: evaluation of constraint function FAILED at the point' );
+            samplefull
+            fprintf(error_msg);
+            cvalue = 1.0e+10 * ones( sample.sdim, 1 );
+        end
+        
+    end    
 
 else
 
@@ -97,42 +112,44 @@ else
         sample.x = sample.x ./ setting.scalefacX;
     end
 
-    try
-        fvalue = f(sample.x);
-    catch
-        disp(' ')
-        disp(' Error: evaluation of objective function FAILED at the point');
-        sample.x
-        disp( ' Possible causes:' )
-        disp([ ' (1) Hidden constraint: your black-box function might not be able to be evaluated', ...
-               ' at that point.' ] );
-        disp([ ' (2) Function handle: check if the function handle', ...
-               ' that you have passed as input is correct.'] );
-        disp([ ' (3) Black-box function: check if your black-box', ...
-               ' function does not contain any internal errors.'] );
-        disp(' Setting fvalue = 1.0e+10. This might affect the final solution.');
-        disp(' ')
-        fvalue = 1.0e+10;
+    if ( strcmp( c, 'combined' ) )
+        
+        try
+            output = f(sample.x);
+            fvalue = output(1);
+            cvalue = output(2:sample.sdim+1);
+        catch
+            disp(' ')
+            disp(' Error: evaluation of the black box FAILED at the point');
+            sample.x
+            fprintf(error_msg);
+            fvalue = 1.0e+10;
+            cvalue = 1.0e+10 * ones( sample.sdim, 1 );
+        end
+        
+    else
+        
+        try
+            fvalue = f(sample.x);
+        catch
+            disp(' ')
+            disp(' Error: evaluation of objective function FAILED at the point');
+            sample.x
+            fprintf(error_msg);
+            fvalue = 1.0e+10;
+        end
+        
+        try
+            cvalue = c(sample.x);
+        catch
+            disp(' ')
+            disp(' Error: evaluation of constraint function FAILED at the point');
+            sample.x
+            fprintf(error_msg);
+            cvalue = 1.0e+10 * ones( sample.sdim, 1 );
+        end
+        
     end
-
-    try
-        cvalue = c(sample.x);
-    catch
-        disp(' ')
-        disp(' Error: evaluation of constraint function FAILED at the point');
-        sample.x
-        disp( ' Possible causes:' )
-        disp([ ' (1) Hidden constraint: your black-box function might not be able to be evaluated', ...
-               ' at that point.' ] );
-        disp([ ' (2) Function handle: check if the function handle', ...
-               ' that you have passed as input is correct.'] );
-        disp([ ' (3) Black-box function: check if your black-box', ...
-               ' function does not contain any internal errors.'] );
-        disp(' Setting cvalue = 1.0e+10*ones(m,1). This might affect the final solution.');
-        disp(' ')
-        cvalue = 1.0e+10 * ones( sample.sdim, 1 );
-    end
-
 end
 
 % Augment fX with new function value

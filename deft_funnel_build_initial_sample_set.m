@@ -26,6 +26,9 @@ if ( strcmp( setting.initial_Y, 'random' ) )
    for  j = 2:setting.cur_degree
       sampleSet.Y( :, j ) = sampleSet.Y( :, 1 ) + ...
            sampleSet.Y( :, j ) * ( Delta / norm( sampleSet.Y( :, j ) ) );
+      
+      % Make sure that the interpolation points are within the bounds
+      sampleSet.Y( :, j ) = max( min( sampleSet.Y( :, j ), setting.ux ), setting.lx );
    end
    
    % Build the initial factorization
@@ -61,6 +64,11 @@ elseif strcmp( setting.initial_Y, 'simplex' )
             k = k + 1;
          end
       end
+   end
+   
+   % Make sure that the interpolation points are within the bounds
+   for  j = 2:setting.cur_degree
+      sampleSet.Y( :, j ) = max( min( sampleSet.Y( :, j ), setting.ux ), setting.lx );
    end
    
    % Build the initial factorization

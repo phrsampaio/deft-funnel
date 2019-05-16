@@ -23,7 +23,7 @@ setting.epsilon          = 1.0e-4;         % Gradient termination accuracy
 setting.epsilon0         = 1.0e-2;         % Initial gradient accuracy threshold
 setting.eps_TR           = 0.0000001;      % Rel. accuracy on the trust-region 
                                            % constraint for steps
-setting.factor_CV        = 1;              % Constant for termination that 
+setting.factor_CV        = 10;              % Constant for termination that 
                                            % multiplies epsilon
 setting.factor_FPU       = 10;             % Multiple of TR radius defining far points
                                            % (for unsuccessful iterations)

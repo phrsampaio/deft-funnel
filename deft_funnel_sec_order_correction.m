@@ -47,6 +47,16 @@ if ( norm_soc <= Delta )
 
     iterate_soc.x = iterate_plus.x + n_xsoc ;
     iterate_soc.s = iterate_plus.s + n_ssoc ;
+    
+    error_msg = [ ' Possible causes:\n', ...
+              ' (1) Hidden constraint: your black-box function might not',  ...
+              ' be able to be evaluated at that point.\n',                  ...
+              ' (2) Function handle: check if the function handle',         ...
+              ' that you have passed as input is correct.\n',               ...
+              ' (3) Black-box function: check if your black-box',           ...
+              ' function does not contain any internal errors.\n',          ...
+              ' Setting output(s) to 1.0e+10. This might affect the',       ...
+              ' final solution.\n\n' ];
 
     if ( iterate.nfix > 0 )
         xsocfull = I( :, iterate_soc.indfix )*iterate_soc.xfix( iterate_soc.indfix ) + ...
@@ -56,17 +66,90 @@ if ( norm_soc <= Delta )
             xsocfull = xsocfull ./ setting.scalefacX;
         end
         
-        iterate_soc.feval = f(xsocfull);
-        iterate_soc.ceval = c(xsocfull);
+        if ( strcmp( c, 'combined' ) )
+
+            try
+                output = f(xsocfull);
+                iterate_soc.feval = output(1);
+                iterate_soc.ceval = output(2:iterate.sdim+1);
+            catch
+                disp(' ')
+                disp( ' Error: evaluation of the black box FAILED at the point');
+                xsocfull
+                fprintf(error_msg);
+                iterate_soc.feval = 1.0e+10;
+                iterate_soc.ceval = 1.0e+10 * ones( iterate.sdim, 1 );
+            end
+
+        else
+            
+            try
+                iterate_soc.feval = f(xsocfull);
+            catch
+                disp(' ')
+                disp(' Error: evaluation of objective function FAILED at the point' );
+                xsocfull
+                fprintf(error_msg);
+                iterate_soc.feval = 1.0e+10;
+            end
+
+            try
+                iterate_soc.ceval = c(xsocfull);
+            catch
+                disp(' ')
+                disp(' Error: evaluation of constraint function FAILED at the point' );
+                xsocfull
+                fprintf(error_msg);
+                iterate_soc.ceval = 1.0e+10 * ones( iterate.sdim, 1 );
+            end
+
+        end
 
     else
 
         if ( setting.scaleX )
             iterate_soc.x = iterate_soc.x ./ setting.scalefacX;
         end
+        
+        if ( strcmp( c, 'combined' ) )
 
-        iterate_soc.feval = f(iterate_soc.x);
-        iterate_soc.ceval = c(iterate_soc.x);
+            try
+                output = f(iterate_soc.x);
+                iterate_soc.feval = output(1);
+                iterate_soc.ceval = output(2:iterate.sdim+1);
+            catch
+                disp(' ')
+                disp( ' Error: evaluation of the black box FAILED at the point');
+                iterate_soc.x
+                fprintf(error_msg);
+                iterate_soc.feval = 1.0e+10;
+                iterate_soc.ceval = 1.0e+10 * ones( iterate.sdim, 1 );
+            end
+
+        else
+            
+            try
+                iterate_soc.feval = f(iterate_soc.x);
+            catch
+                disp(' ')
+                disp(' Error: evaluation of objective function FAILED at the point' );
+                iterate_soc.x
+                fprintf(error_msg);
+                iterate_soc.feval = 1.0e+10;
+            end
+
+            try
+                iterate_soc.ceval = c(iterate_soc.x);
+            catch
+                disp(' ')
+                disp(' Error: evaluation of constraint function FAILED at the point' );
+                iterate_soc.x
+                fprintf(error_msg);
+                iterate_soc.ceval = 1.0e+10 * ones( iterate.sdim, 1 );
+            end
+
+        end
+        
     end
 
     %  Update evaluation counter

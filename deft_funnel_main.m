@@ -54,7 +54,7 @@ for k = nitold+1:setting.maxit
     nit = nit + 1;
     
     % Counter for the loop in the criticality test
-    if( strcmp( it_type, 'criticality test') )
+    if( strcmp( it_type, 'criticality test' ) )
         criticalLoop = criticalLoop + 1;
     else
         criticalLoop = 0;
@@ -302,7 +302,7 @@ for k = nitold+1:setting.maxit
           if ( indicators.norm_c_s <= setting.epsilon &&                    ...
                indicators.norm_glag <= setting.epsilon )
               
-              if ( sampleSet.errg <= setting.factor_CV * setting.epsilon && strcmp( level,'toplevel' ) )
+              if ( sampleSet.errg <= setting.epsilon && strcmp( level,'toplevel' ) )
                   
                   it_type = 'convergence';
                   msg = [ ' **********************************',            ...

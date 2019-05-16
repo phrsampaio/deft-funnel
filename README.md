@@ -131,6 +131,7 @@ The file deft_funnel_problem_init.m also defines if a constraint in
 deft_funnel_problem_cons.m is an equality or an inequality through 
 the lower bounds 'ls' and the upper bounds 'us'.
 
+
 # Using DEFT-FUNNEL with multi-start
 
 Run the 'startup' function to add the necessary folders to the path:
@@ -236,5 +237,18 @@ deft_funnel_multistart( @problem_PrP_obj, @problem_PrP_cons, 4, 3,              
 'lsbounds', [ -Inf -Inf -Inf ], 'usbounds', [ 0 0 0 ],                           ...
 'lxbounds', [ 0 0 0 0 ], 'uxbounds', [ 1 1 50 240 ] )
 ```
+
+# Single simulation call that returns both objective and constraint values
+
+In this case, the first argument must contain the black-box function handle and the
+second argument must be the string ¨combined¨ as in the example below:
+```
+>> [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] = ...
+deft_funnel( @blackbox, ¨combined¨, x0, nbcons )
+```
+
+The solver assumes that the first output of @blackbox contains the objective 
+function evaluation while the remaining outputs are the constraint functions´ 
+evaluations.
 
 **CONDITIONS OF USE:** Use at your own risk! No guarantee of any kind given.

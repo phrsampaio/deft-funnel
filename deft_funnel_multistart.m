@@ -14,8 +14,38 @@ function [ best_sol, best_fval, best_indicators, total_eval,                ...
 % predefined total number of simulations.
 %
 % Please read the README file before embarking on this journey.
-% Last update: 11/02/2019.
+% Last update: 15/05/2019.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Check the type of mandatory inputs.
+if ( ( ~isa( cons, 'function_handle' ) && ~strcmp( cons, 'combined' ) ) ||  ...
+     ~isa( objfun, 'function_handle' ) || ~isnumeric( n ) ||                ...
+     ~isnumeric( nbcons ) )
+    
+    if ( ~isa( cons, 'function_handle' ) && ~strcmp( cons, 'combined' ) )
+        msg = [ ' DEFT-FUNNEL GLOBAL error: the second argument is',        ...
+                ' neither a function handle nor the string "combined"!',    ...
+                ' Terminating.' ];
+    end
+    if ( ~isa( objfun, 'function_handle' ) )
+        msg = [ ' DEFT-FUNNEL GLOBAL error: the first argument is not a', 	...
+                ' function handle! Terminating.' ];
+    end
+    if ( ~isa( cons, 'function_handle' ) || isstring(cons) )
+        msg = [ ' DEFT-FUNNEL GLOBAL error: the second argument is',        ...
+                ' neither a function handle nor a string! Terminating.' ];
+    end
+    if ( ~isnumeric( n ) )
+        msg = [ ' DEFT-FUNNEL GLOBAL error: the number of decision',        ...
+                ' variables is not numeric! Terminating.' ];
+    end
+    if ( ~isnumeric( nbcons ) )
+        msg = [ ' DEFT-FUNNEL GLOBAL error: the number of constraints is',	...
+                ' not numeric! Terminating.' ];
+    end
+    disp( msg )
+    return
+end
 
 % Initialization
 X = [];                     % set of stationary points
@@ -82,13 +112,13 @@ for i = 1:2:noptargs
                     lx=lx';
                 end
             else
-                msg = [ ' DEFT-FUNNEL multistart error: lower x bounds',   	...
+                msg = [ ' DEFT-FUNNEL GLOBALOPT warning: lower x bounds',   ...
                         ' empty or not of length n! No bounds used.' ];
                 disp( msg )
             end
         else
-            msg = [ ' DEFT-FUNNEL multistart error: wrong type of input',  	... 
-                    ' for lower bounds! No bounds used.'];
+            msg = [ ' DEFT-FUNNEL GLOBALOPT warning: wrong type of input',	... 
+                    ' for lower x bounds! No bounds used.'];
             disp( msg )
         end
         
@@ -102,13 +132,13 @@ for i = 1:2:noptargs
                     ux = ux';
                 end
             else
-                msg = [ ' DEFT-FUNNEL multistart error: upper x bounds', 	...
+                msg = [ ' DEFT-FUNNEL GLOBALOPT warning: upper x bounds', 	...
                         ' empty or not of length n! No bounds used.' ];
                 disp( msg )
             end
         else
-            msg = [ ' DEFT-FUNNEL multistart error: wrong type of input', 	... 
-                    ' for upper bounds! No bounds used.' ];
+            msg = [ ' DEFT-FUNNEL GLOBALOPTOPT warning: wrong type of', 	... 
+                    ' input for upper x bounds! No bounds used.' ];
             disp( msg )
         end
         
@@ -122,13 +152,14 @@ for i = 1:2:noptargs
                     ls = ls';
                 end
             else
-                msg = [ ' DEFT-FUNNEL multistart error: lower s bounds',    ...
-                        '  empty or not of length n! No bounds used.' ];
+                msg = [ ' DEFT-FUNNEL GLOBALOPT warning: lower s bounds', 	...
+                        ' empty or not of length "nbcons"! Setting to',     ...
+                        ' zero by default.' ];
                 disp( msg )
             end
         else
-            msg = [ ' DEFT-FUNNEL multistart error: wrong type of input',   ... 
-                    ' for lower bounds! No bounds used.' ];
+            msg = [ ' DEFT-FUNNEL GLOBALOPT warning: wrong type of input',	... 
+                    ' for lower s bounds! Setting to zero by default.' ];
             disp( msg )
         end
         
@@ -142,13 +173,14 @@ for i = 1:2:noptargs
                     us = us';
                 end
             else
-                msg = [ ' DEFT-FUNNEL multistart error: upper s bounds',    ...
-                        ' empty or not of length n! No bounds used.' ];
+                msg = [ ' DEFT-FUNNEL GLOBALOPT warning: upper s bounds', 	...
+                        ' empty or not of length "nbcons"! Setting to',     ...
+                        ' zero by default.' ];
                 disp( msg )
             end
         else
-            msg = [ ' DEFT-FUNNEL multistart error: wrong type of input',   ... 
-                    ' for upper bounds! No bounds used.' ];
+            msg = [ ' DEFT-FUNNEL GLOBALOPT warning: wrong type of input',	... 
+                    ' for upper s bounds! Setting to zero by default.' ];
             disp( msg )
         end
         
@@ -157,8 +189,9 @@ for i = 1:2:noptargs
         if ( isnumeric( varargin{ i + 1 } ) )
             maxeval = varargin{ i + 1 };
         else
-            msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' maximum number of simulations!' ];
+            msg = [ ' DEFT-FUNNEL GLOBALOPT warning: wrong type of',        ... 
+                    ' input for maximum number of simulations!',          	...
+                    ' Default value will be used.' ];
             disp( msg )
         end
         
@@ -167,8 +200,9 @@ for i = 1:2:noptargs
         if ( isnumeric( varargin{ i + 1 } ) )
             maxeval_ls = varargin{ i + 1 };
         else
-            msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' maximum number of simulations per local search!' ];
+            msg = [ ' DEFT-FUNNEL GLOBALOPT error: wrong type of input',    ... 
+                    ' for maximum number of simulations per local search!',	...
+                    ' Default value will be used.' ];
             disp( msg )
         end
         
@@ -177,14 +211,15 @@ for i = 1:2:noptargs
         if ( isnumeric( varargin{ i + 1 } ) )
             maxeval_ls = varargin{ i + 1 };
         else
-            msg = [ ' DEFT-FUNNEL error: wrong type of input for',          ... 
-                    ' the ojective function value of the global optimum!' ];
+            msg = [ ' DEFT-FUNNEL GLOBALOPT warning: wrong type of input',	... 
+                    ' for the ojective function value of the global',       ...
+                    ' optimum! Ignoring input value.' ];
             disp( msg )
         end
         
     else
-        msg = [ ' DEFT-FUNNEL multistart warning: undefined keyword',       ...
-                varargin{ i }, '! Ignoring.' ];
+        msg = [ ' DEFT-FUNNEL GLOBALOPT warning: undefined keyword',      	...
+                varargin{ i }, '! Ignoring input value.' ];
         disp( msg )
     end
 end
@@ -235,8 +270,32 @@ for k = 1:maxit
     
     % Calculate their objective, constraint and merit function values
     for i = 1:size( Snew, 2 )
-       fS( nbsamples_old + i ) = objfun( Snew(:, i) );
-       cS( :, nbsamples_old + i ) = cons( Snew(:, i) );
+        if ( strcmp( cons, 'combined' ) )
+            try
+                output = objfun( Snew(:, i) );
+                fS( nbsamples_old + i )    = output(1);
+                cS( :, nbsamples_old + i ) = output(2:nbcons+1);
+            catch
+                disp(' ')
+                disp( ' Error: evaluation of the black box FAILED at the point');
+                Snew(:, i)
+            end
+        else
+            try
+                fS( nbsamples_old + i )    = objfun( Snew(:, i) );
+            catch
+                disp(' ')
+                disp( ' Error: evaluation of the objective function FAILED at the point');
+                Snew(:, i)
+            end
+            try
+                cS( :, nbsamples_old + i ) = cons( Snew(:, i) );
+            catch
+                disp(' ')
+                disp( ' Error: evaluation of the constraint(s) FAILED at the point');
+                Snew(:, i)
+            end
+        end
     end
     total_eval = total_eval + nb_of_new_samples;
     
