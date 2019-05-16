@@ -238,13 +238,16 @@ deft_funnel_multistart( @problem_PrP_obj, @problem_PrP_cons, 4, 3,              
 'lxbounds', [ 0 0 0 0 ], 'uxbounds', [ 1 1 50 240 ] )
 ```
 
-# Single simulation call that returns both objective and constraint values
+# Evaluation of objective and constraints from a single black-box call
 
-In this case, the first argument must contain the black-box function handle and the
-second argument must be the string ¨combined¨ as in the example below:
+In this case, the first argument must contain the black-box function handle and 
+the second argument must be the string 'combined' as in the examples below:
 ```
 >> [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] = ...
-deft_funnel( @blackbox, ¨combined¨, x0, nbcons )
+deft_funnel( @blackbox, 'combined', x0, nbcons )
+
+>> [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] = ...
+deft_funnel_multistart( @blackbox, 'combined', x0, nbcons )
 ```
 
 The solver assumes that the first output of @blackbox contains the objective 
