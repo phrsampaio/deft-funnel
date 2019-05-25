@@ -18,15 +18,15 @@ if ( ( ~isa( c, 'function_handle' ) && ~strcmp( c, 'combined' ) ) ||        ...
                 ' Terminating.' ];
     end
     if ( ~isa( f, 'function_handle' ) )
-        msg = [ ' DEFT-FUNNEL LOCALOPT error: the first argument is not a',	...
+        msg = [ ' DEFT-FUNNEL LOCALOPT error: the first argument is not a', ...
                 ' function handle! Terminating.' ];
     end
     if ( ~isnumeric( x0 ) )
-        msg = [ ' DEFT-FUNNEL LOCALOPT error: the starting point is not a',	...
+        msg = [ ' DEFT-FUNNEL LOCALOPT error: the starting point is not a', ...
                 ' numeric vector! Terminating.' ];
     end
     if ( ~isnumeric( nbcons ) )
-        msg = [ ' DEFT-FUNNEL LOCALOPT error: the number of constraints',	...
+        msg = [ ' DEFT-FUNNEL LOCALOPT error: the number of constraints',   ...
                 ' is not numeric! Terminating.' ];
     end
     disp( msg )
@@ -124,12 +124,12 @@ for i = 1:2:noptargs
                     setting.lx=setting.lx';
                 end
             else
-                msg = [ ' DEFT-FUNNEL LOCALOPT warning: lower x bounds',	...
+                msg = [ ' DEFT-FUNNEL LOCALOPT warning: lower x bounds',    ...
                         ' empty or not of length n! No bounds used.' ];
                 disp( msg )
             end
         else
-            msg = [ ' DEFT-FUNNEL LOCALOPT warning: wrong type of input', 	... 
+            msg = [ ' DEFT-FUNNEL LOCALOPT warning: wrong type of input',   ... 
                     ' for lower x bounds! No bounds used.'];
             disp( msg )
         end
@@ -144,8 +144,8 @@ for i = 1:2:noptargs
                     setting.ux = setting.ux';
                 end
             else
-                msg = [ ' DEFT-FUNNEL LOCALOPT warning: upper x bounds', 	...
-                        '  empty or not of length n! No bounds used.' ];
+                msg = [ ' DEFT-FUNNEL LOCALOPT warning: upper x bounds',    ...
+                        ' empty or not of length n! No bounds used.' ];
                 disp( msg )
             end
         else
@@ -164,7 +164,7 @@ for i = 1:2:noptargs
                     setting.ls = setting.ls';
                 end
             else
-                msg = [ ' DEFT-FUNNEL LOCALOPT warning: lower s bounds', 	...
+                msg = [ ' DEFT-FUNNEL LOCALOPT warning: lower s bounds',    ...
                         ' empty or not of length "nbcons"! Setting to',     ...
                         ' zero by default.' ];
                 disp( msg )
@@ -185,7 +185,7 @@ for i = 1:2:noptargs
                     setting.us = setting.us';
                 end
             else
-                msg = [ ' DEFT-FUNNEL LOCALOPT warning: upper s bounds',   	...
+                msg = [ ' DEFT-FUNNEL LOCALOPT warning: upper s bounds',    ...
                         ' empty or not of length "nbcons"! Set to zero by', ...
                         ' default.' ];
                 disp( msg )
@@ -218,7 +218,7 @@ for i = 1:2:noptargs
         end
         
     else
-        msg = [ ' DEFT-FUNNEL LOCALOPT warning: undefined keyword',       	...
+        msg = [ ' DEFT-FUNNEL LOCALOPT warning: undefined keyword',         ...
                 varargin{ i }, '! Ignoring input value.' ];
         disp( msg )
     end
@@ -264,9 +264,9 @@ for j=1:n
             Delta = 0.5 * temp( j );
             [ Delta_f, Delta_c ] = deal( Delta );
             
-            disp( [ ' Diff. between lower and upper bound of component ',       ...
-                    int2str( j ), ' is less than 2*Delta0! New Delta0 set to ', ...
-                    num2str( Delta ) ] );
+            disp( [ ' Diff. between lower and upper bound of component ',   ...
+                    int2str( j ), ' is less than 2*Delta0! New Delta0',     ...
+                    ' set to ', num2str( Delta ) ] );
         end
     end
     
