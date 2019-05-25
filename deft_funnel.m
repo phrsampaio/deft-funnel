@@ -1,4 +1,5 @@
-function [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] = deft_funnel( f, c, x0, nbcons, varargin )
+function [ x, fx, mu, indicators, evaluations, iterate, exit_algo ] =       ...
+    deft_funnel( f, c, x0, nbcons, varargin )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Derivative-Free Trust FUNNEL (DEFT-FUNNEL) for Local Optimization

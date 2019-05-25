@@ -1,8 +1,7 @@
 function setting = deft_funnel_set_parameters( n, nbcons, cur_degree, rep_degree, initial_Y )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Defines the majority of the parameters' setting. A description
-% of each parameter is given below.
+% Desc: Defines the parameters' setting.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setting.alpha            = 0.1;            % Reduction ratio for epislon_i
@@ -69,8 +68,8 @@ setting.kappa_ill        = 1e+15;          % Threshold to declare a system matri
                                            % as ill-conditioned
 setting.kappa_n          = 1.0e+2 ;        % Feasibility problem trust region: 
                                            % ||n_step|| <= min(Delta_c, kappa_n*pi_v)
-setting.kappa_tx1 	     = 0.9 ;           % vmax update formula
-setting.kappa_tx2	     = 0.5 ;           % vmax update formula
+setting.kappa_tx1        = 0.9 ;           % vmax update formula
+setting.kappa_tx2        = 0.5 ;           % vmax update formula
 setting.kappa_th         = 2000;           % Threshold for a safely nondegenerate 
                                            % set of points
 setting.Lambda_XN        = 1.0e-10;        % Poisedness for new iterates
