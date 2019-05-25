@@ -1,12 +1,13 @@
 function [ sampleSet, evaluations, Delta_f, Delta_c, xstatus, sstatus,      ...
            it_type, poised_model ] = deft_funnel_mu_iteration( f, c,        ...
              sampleSet, iterate, setting, evaluations, indicators, const,   ...
-             xstatus, sstatus, exit_nstep, Delta_f, Delta_c, it_type, poised_model )
+             xstatus, sstatus, exit_nstep, Delta_f, Delta_c, it_type,       ...
+             poised_model )
             
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computations for the mu-iterations with possible change in the
 % interpolation set in order to improve the surrogate models.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % If the error in the models is not close to zero, improve the
 % models by reducing the radius of the interpolation set.
@@ -17,8 +18,8 @@ if ( sampleSet.errg > setting.epsilon*1.0e-3 )
     
     radius = 0.3*sampleSet.Y_radius;
     
-    [ sampleSet, replaced ] = deft_funnel_repair_Y( sampleSet,         ...
-         iterate, setting, radius);
+    [ sampleSet, replaced ] = deft_funnel_repair_Y( sampleSet, iterate,     ...
+        setting, radius);
      
     poised_model = 1;
     
@@ -35,9 +36,9 @@ if ( sampleSet.errg > setting.epsilon*1.0e-3 )
         sample.x = sampleSet.Y( :, j );
 
         % Update X and evaluate function at ynew
-        [ sampleSet, sample, evaluations, xstatus, sstatus ] =          ...
-        deft_funnel_augmX_evalfc( f, c, sample, sampleSet, setting,     ...
-        evaluations, xstatus, const.inY, sstatus );
+        [ sampleSet, sample, evaluations, xstatus, sstatus ] =              ...
+            deft_funnel_augmX_evalfc( f, c, sample, sampleSet, setting,     ...
+            evaluations, xstatus, const.inY, sstatus );
 
         % Update Y function values
         sampleSet.fY( j )    = sampleSet.fX( sampleSet.nbPoints );

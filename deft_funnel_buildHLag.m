@@ -1,7 +1,7 @@
 function H = deft_funnel_buildHLag( mu, derivatives )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Builds the hessian of the Lagrangian function.
+% Desc: Builds the Hessian of the Lagrangian function.
 % 
 % Input:
 %   - mu          : Lagrange multipliers

@@ -22,11 +22,11 @@ function [ sampleSet, sample, evaluations, xstatus, sstatus ] =             ...
 %                    or not (1 or 0)
 %
 % Output:
-%   - sampleSet    : updated struct of the sample set
-%   - sample       : updated with the function values evaluated
-%   - evaluations  : updated based on the new point
-%   - xstatus      : updated based on the new point
-%   - sstatus      : updated based on the new point
+%   - sampleSet    : updated with the new sample point
+%   - sample       : updated with the evaluations of the functions f and c
+%   - evaluations  : updated
+%   - xstatus      : updated
+%   - sstatus      : updated
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 full_n  = sample.fulldim;
@@ -44,6 +44,7 @@ index = sampleSet.nbPoints;
 xstatus(index) = xstatus_val;
 sstatus(index) = 1; % the point is contained in the current subspace
 
+% Error message in case of evaluation failure
 error_msg = [ ' Possible causes:\n', ...
               ' (1) Hidden constraint: your black-box function might not',  ...
               ' be able to be evaluated at that point.\n',                  ...

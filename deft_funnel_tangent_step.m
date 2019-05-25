@@ -23,7 +23,8 @@ g_nsmall = models.derivatives.gfx + models.derivatives.HLag * nstep_x ;
 iter_nstep_derivatives = models.derivatives;
 iter_nstep_derivatives.gfx = g_nsmall;
 
-indicators.pi_f = deft_funnel_compute_optimality( iter_nstep, iter_nstep_derivatives, setting );
+indicators.pi_f = deft_funnel_compute_optimality( iter_nstep,               ...
+    iter_nstep_derivatives, setting );
 if ( indicators.pi_f < 0 )
     fprintf('pi_f negative. Setting it to the gradient of the Lagrangian of previous iteration.\n');
     indicators.pi_f = indicators.norm_glag;
@@ -31,7 +32,8 @@ end
 
 if( norm_n <= setting.kappa_b * Delta )
 
-    iterate.mu = deft_funnel_compute_lag_mu( iter_nstep, iter_nstep_derivatives, setting );
+    iterate.mu = deft_funnel_compute_lag_mu( iter_nstep,                    ...
+        iter_nstep_derivatives, setting );
 
     % If the dual optimality measure is sufficiently large,
     % compute a suitable tangent step t.
@@ -67,13 +69,15 @@ if( norm_n <= setting.kappa_b * Delta )
                 'on','Display','off' );
 
             [ tstep, fevallinprog, exitflag ] =                             ...
-                linprog( g_n, [], [], models.derivatives.J_s, b, lb', ub', init_point, options );
+                linprog( g_n, [], [], models.derivatives.J_s, b, lb', ub',  ...
+                init_point, options );
 
             if ( exitflag == -2 )
                 options = optimset( 'LargeScale','off','Simplex',           ...
                     'off','Display','off' );
                 [ tstep, fevallinprog, exitflag ] =                         ...
-                linprog( g_n, [], [], models.derivatives.J_s, b, lb', ub', init_point, options );
+                    linprog( g_n, [], [], models.derivatives.J_s, b, lb',   ...
+                    ub', init_point, options );
             end
 
             tstep_x = tstep( 1:n );

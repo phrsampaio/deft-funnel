@@ -45,12 +45,7 @@ See `License.txt` for more info.
 
 # Using DEFT-FUNNEL without multi-start
 
-Run the 'startup' function to add the necessary folders to the path:
-```
->> startup
-```
-
-Then call DEFT-FUNNEL at the Matlab command window by typing:
+Call DEFT-FUNNEL at the Matlab command window by typing:
 ```
 >> [ x, fx, norm_c_s, mu, nfeval ] = deft_funnel( @obj_function, @constraints, x0, nbcons )
 ```
@@ -116,16 +111,21 @@ deft_funnel( @problem_hs23_obj, @problem_hs23_cons, [3 1], 5,        ...
 'lxbounds', [-50 -50], 'uxbounds', [50 50] )
 ```
 
-A collection of tests may be run through run_deft_funnel.m by typing
+A collection of tests may be run by typing
 ```
+>> startup
+
 >> run_deft_funnel
 ```
+The 'startup' function adds the folder of test problems to the path and 
+'run_deft_funnel' calls DEFT-FUNNEL within a loop to solve those 
+problems.
 
-at the Matlab command window. run_deft_funnel.m makes use of 3 files that
-describe each of the test problems:
-1. deft_funnel_problem_init.m (entry parameters), 
-2. deft_funnel_problem_obj.m (objective function) 
-3. deft_funnel_problem_cons.m (constraint function(s)).
+The file run_deft_funnel.m makes use of 3 other files that
+describe the test problems as follows:
+1. deft_funnel_problem_init.m - entry parameters, 
+2. deft_funnel_problem_obj.m - objective function,
+3. deft_funnel_problem_cons.m - constraint function(s).
 
 The file deft_funnel_problem_init.m also defines if a constraint in 
 deft_funnel_problem_cons.m is an equality or an inequality through 
@@ -134,12 +134,7 @@ the lower bounds 'ls' and the upper bounds 'us'.
 
 # Using DEFT-FUNNEL with multi-start
 
-Run the 'startup' function to add the necessary folders to the path:
-```
->> startup
-```
-
-Then call DEFT-FUNNEL at the Matlab command window by typing:
+Call DEFT-FUNNEL at the Matlab command window by typing:
 ```
 >> [ best_sol, best_fval, best_indicators, total_eval, nb_local_searches, fX ] = ...
 deft_funnel_multistart( @obj_function, @constraints, n, nbcons )
@@ -189,7 +184,15 @@ No starting point is required from the user in the multi-start case.
 
 ## Examples of usage
 
-The following problems are included in this package:
+A collection of well-known test problems for constrained global optimization 
+are included in this package. In order to run DEFT-FUNNEL on any of them, 
+first type:
+```
+>> startup
+```
+
+The 9 test problems collected from the litterature can be solved as follows:
+
 ```
 >> [ best_sol, best_fval, best_indicators, total_eval, nb_local_searches, fX ] = ...
 deft_funnel_multistart( @problem_handbook_quadcons_pb3_obj,                      ...

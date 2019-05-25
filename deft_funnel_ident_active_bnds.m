@@ -134,7 +134,7 @@ if ( norm( iterate.x - xnew ) > setting.eps_bnd )
       end
    end
    if ( coincides )
-      msg = [ ' *** Current iterate moved to the bounds ',                      ...
+      msg = [ ' *** Current iterate moved to the bounds ',                  ...
                  'but this point already exists' ]; 
       if ( verbose > 0 )
          disp( msg )
@@ -237,7 +237,7 @@ else
    ind_inSubspc = find( sstatus >= const.in ); 
     
    if ( verbose > 0 )
-     disp( [ ' *** Nb. of points at an active bound: ',                         ...
+     disp( [ ' *** Nb. of points at an active bound: ',                     ...
              num2str( length( ind_inSubspc ) ) ] )
      disp( ' *** Their indices: ')
      ind_inSubspc'
@@ -294,7 +294,7 @@ else
    
    if ( verbose > 0 )
       disp( ' ' )
-      disp( [ ' *** New set of points in subspace (sample set Y) nfree = ',              ...
+      disp( [ ' *** New set of points in subspace (sample set Y) nfree = ', ...
               num2str( new_n )] ) 
       sampleSet.Y
       disp( ' *** Computed new model ' )
@@ -323,7 +323,7 @@ else
    end 
          
    % Solve problem in the subspace
-   [ exit_algo, nit, sampleSet, iterate, indicators, evaluations, models,       ...
+   [ exit_algo, nit, sampleSet, iterate, indicators, evaluations, models,   ...
     xstatus, sstatus, vstatus, sspace_save, xspace_save, const,             ...
     modelSize, Delta, Delta_f, Delta_c, vmax, msg ] =                       ...
     deft_funnel_main( f, c, nit-1, nit-1, sampleSet, iterate, setting,      ...
@@ -333,7 +333,7 @@ else
 
    if ( verbose > 0 )
       disp( ' ' )
-      disp( [ ' *** Exit subspace problem (nfree = ',                     ...
+      disp( [ ' *** Exit subspace problem (nfree = ',                       ...
               num2str(new_n) ') ********'])
       disp( ' ##################################################' )
       disp( ' ' )
@@ -379,7 +379,7 @@ if ( evaluations.nfeval >= setting.maxeval )
     else
        it_type = 'back to upper level';
     end
-    deft_funnel_printout( nit, evaluations, iterate, setting, indicators,       ...
+    deft_funnel_printout( nit, evaluations, iterate, setting, indicators,   ...
     vmax, 0, 0, Delta, 0, it_type, '', sampleSet.errg );
     return
 end

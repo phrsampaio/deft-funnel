@@ -1,16 +1,18 @@
 function setting = deft_funnel_set_parameters( n, nbcons, cur_degree, rep_degree, initial_Y )
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Defines the majority of the parameters' setting. A description
 % of each parameter is given below.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-setting.alpha            = 0.1;            % Subsequent reduction in gradient norm 
-                                           % before repair
-setting.beta             = 1;              % Ratio between gradient norm and radius 
-                                           % after repair
+setting.alpha            = 0.1;            % Reduction ratio for epislon_i
+                                           % (used in the criticality step)
+setting.beta             = 1;              % Ratio between optimality/feasibility
+                                           % measures and the trust-region
+                                           % radius (used in the
+                                           % criticality step)
 setting.CNTsin           = 0;              % Variable to produce a quasi-random vector
-setting.criterion_S      = 'weighted';     % Selection of outgoing point at 
+setting.criterion_S      = 'weighted';     % Selection criterion of outgoing point at 
                                            % successful iterations:
 setting.criterion_FP     = 'distance';     % The same, but for far points at 
                                            % unsuccessful iterations
@@ -18,12 +20,12 @@ setting.criterion_CP     = 'standard';     % The same, but for close points at
                                            % unsuccessful iterations
 setting.cur_degree       = cur_degree;     % The degree for the initial model
 setting.rep_degree       = rep_degree;     % The minimum degree for the model 
-                                           % after repair
-setting.epsilon          = 1.0e-4;         % Gradient termination accuracy
+                                           % after reparation
+setting.epsilon          = 1.0e-4;         % Optimality/feasibility termination accuracy
 setting.epsilon0         = 1.0e-2;         % Initial gradient accuracy threshold
 setting.eps_TR           = 0.0000001;      % Rel. accuracy on the trust-region 
                                            % constraint for steps
-setting.factor_CV        = 10;              % Constant for termination that 
+setting.factor_CV        = 10;             % Constant for termination that 
                                            % multiplies epsilon
 setting.factor_FPU       = 10;             % Multiple of TR radius defining far points
                                            % (for unsuccessful iterations)
@@ -33,10 +35,12 @@ setting.factor_FPR       = 10;             % Multiple of TR radius defining far 
                                            % for large model gradient)
 setting.fmax             = 1.e25;          % Maximum possible function value. Otherwise,
                                            % it is considered as NaN
-setting.rho_eps          = 1.0e-14;        % Used for calculating ´rho´
-setting.eps_bnd     = setting.epsilon/10;  % Threshold to define a bound as 
+setting.rho_eps          = 1.0e-14;        % Used for avoiding rounding error 
+                                           % in the calculation of 'rho'
+setting.eps_bnd     = setting.epsilon/10;  % Threshold to define a bound as nearly active
 setting.eps_L            = 0.001;          % Rel. accuracy on the trust-region 
-                                           % constraint for L max
+                                           % constraint for maximization of
+                                           % Lagrangian function
 setting.eta1             = 1.0e-4;         % Min rho value for successful iterations
 setting.eta2             = 0.9;            % Min rho value for very successful iterations
 setting.eta3             = 0.6 ;           % Threshold for theta used to change 
@@ -64,7 +68,7 @@ setting.kappa_delta 	 = 0.2 ;           % Condition to be a f-iteration:
 setting.kappa_ill        = 1e+15;          % Threshold to declare a system matrix 
                                            % as ill-conditioned
 setting.kappa_n          = 1.0e+2 ;        % Feasibility problem trust region: 
-                                           % || n || <= min(Delta_c, kappa_n*pi_v)
+                                           % ||n_step|| <= min(Delta_c, kappa_n*pi_v)
 setting.kappa_tx1 	     = 0.9 ;           % vmax update formula
 setting.kappa_tx2	     = 0.5 ;           % vmax update formula
 setting.kappa_th         = 2000;           % Threshold for a safely nondegenerate 
@@ -84,25 +88,22 @@ setting.show_errg        = 1;              % Display of the gradient error estim
 setting.shrink_Delta     = 1;              % Shrink trust-region radius in every 
                                            % unsuccessful iteration. 
                                            % Default: 1 (true)
-setting.shrink_Delta_max = 0*n;              % Max nb of times to shrink on 
+setting.shrink_Delta_max = 0*n;            % Max nb of times to shrink on 
                                            % unsuccesful iterations
-setting.stallfact_subsp  = 1.0e-2;            % Termination (stalled) when
-                                           % ||d|| or Delta <=
-                                           % epsilon*stallfact*norm(x)
+setting.stallfact_subsp  = 1.0e-2;         % Termination (stalled) when
+                                           % ||d|| or Delta <= epsilon*stallfact*norm(x)
 setting.stallfact_fullsp = 1.0e-4;           
-                                           % or Delta <= epsilon*stallfact*norm(x)
+
 setting.stratLam         = 1;              % Strategy to adjust lambda when solving 
                                            % the bc MS problem
-                                           % nearly-active: |x - bnd|<eps_bnd
 setting.track_error      = 1;              % Compute the error on the models
-                                           % based on the Lambda-poisedness
-                                           % measure
-setting.verbose          = 1;              % Printout quantity
+                                           % regularly based on the Lambda-poisedness measure
+setting.verbose          = 1;              % Printout level
 setting.whichmodel       = 2;              % Approach to build the local models:
                                            % 0 = Subbasis model
                                            % 1 = Frobenius-norm model
                                            % 2 = minimum l2-norm
-                                           % 3 = regression
+                                           % 3 = regression (recommended for noisy functions)
                                            
 % Set the default bounds for variables x and s
 setting.lx(1:n) = -Inf;                    % Default x lower bounds

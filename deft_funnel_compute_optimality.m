@@ -1,15 +1,15 @@
 function [ pi_f, exitc ] = deft_funnel_compute_optimality( iterate, derivatives, setting )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Computes the dual optimiality measure by solving the following problem
+% Desc: Computes the dual optimality measure by solving the following problem
 %
 %       min          g_n * dr
 %       s.t.      J_s * dr = 0,
 %             lx - x <= dr^x <= ux - x,
 %             ls - s <= dr^s <= us - s,
-%                 ||dr|| < = 1.
+%                 ||dr|| <= 1.
 %
-% The optimality measure if defined as
+% The optimality measure is defined as
 %              pi_f = | <g_n,dr*> |, 
 % where dr* is the solution to the problem above.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,6 +20,7 @@ m = length( iterate.s );
 J_s = derivatives.J_s;
 g_n = [ derivatives.gfx; zeros( m, 1 ) ];
 
+% Defined lower and upper bounds for the direction to be computed
 lb(1:n+m) = -1.0;
 ub(1:n+m) = 1.0;
 
@@ -44,12 +45,13 @@ options = optimset( 'LargeScale','off','Simplex','off','Display','off' );
 [ dr, fevallinp, exitflag, output ] = linprog( g_n, [], [], J_s, b, ...
     lb', ub', initPoint, options );
 
-% Compute the dual optimality measure
+% Check if a solution was found and if it is different from zero
 if ( norm( dr ) > 1.0e-14 || exitflag == -2 )
     
+    % Compute the dual optimality measure
     pi_f = abs(g_n.' * dr);
 
-    if ( exitflag == -2 ) % Try another method
+    if ( exitflag == -2 ) % Try another method if no solution was found
 
         options = optimset( 'LargeScale','off','Simplex','on',     ...
             'Display','off' );

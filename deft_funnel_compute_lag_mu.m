@@ -1,7 +1,9 @@
 function [ mu, ws, zs, wx, zx ] = deft_funnel_compute_lag_mu( iterate, derivatives, setting )
                                                 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Computes estimates for the Lagrange multipliers using the solver BLLS
+% Desc: Computes estimates for the Lagrange multipliers using the solver 
+% BLLS (bound-constrained linear least squares) implemented in
+% 'deft_funnel_blls_exp.m' and 'deft_funnel_blls_spwmin.m'.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
 % Retrieve necessary data

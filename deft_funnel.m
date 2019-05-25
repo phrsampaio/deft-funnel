@@ -21,10 +21,6 @@ if ( ( ~isa( c, 'function_handle' ) && ~strcmp( c, 'combined' ) ) ||        ...
         msg = [ ' DEFT-FUNNEL LOCALOPT error: the first argument is not a',	...
                 ' function handle! Terminating.' ];
     end
-    if ( ~isa( c, 'function_handle' ) || isstring(c) )
-        msg = [ ' DEFT-FUNNEL LOCALOPT error: the second argument is',      ...
-                ' neither a function handle nor a string! Terminating.' ];
-    end
     if ( ~isnumeric( x0 ) )
         msg = [ ' DEFT-FUNNEL LOCALOPT error: the starting point is not a',	...
                 ' numeric vector! Terminating.' ];
@@ -40,7 +36,7 @@ end
 % Reset the random generator 
 rng('shuffle', 'twister');
 
-%  Make sure the starting point is a column vector
+% Make sure the starting point is a column vector
 if ( size( x0, 1 ) == 1 && size( x0, 2 ) > 1 )
    x0 = x0';
 end
@@ -56,7 +52,7 @@ if( nbcons < 0 || n < 0 )
 end
 
 % Check the parity of the variable argument list.
-noptargs = size( varargin, 2 );    % The number of optional arguments
+noptargs = size( varargin, 2 ); % The number of optional arguments
 if mod( noptargs, 2 ) > 0
    msg   = [' DEFT-FUNNEL LOCALOPT error: the number of variable',          ...
             ' arguments must be even! Default parameters used.' ];
@@ -242,7 +238,7 @@ else
 end
 
 % Check the bounds and correct intial Delta if there is no sufficient space 
-% between the bounds. Shift x0 if is out of the box.
+% between the bounds. Shift x0 if it is out of the box.
 disp(' ')
 for j=1:n
     

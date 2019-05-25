@@ -3,12 +3,12 @@ function [ sampleSet, iterate, evaluations, xstatus, sstatus, poised_model, ...
            sampleSet, iterate, setting, evaluations, xstatus, sstatus,      ...
            const, modelSize, Delta )
        
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Builds the initial sample set using either of the followinbg 
 % two stratagies:
-% (1) random interpolation points;
-% (2) simplex approach.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (1) random interpolation points
+% (2) simplex approach
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if ( setting.verbose >= 2 )
    disp( ' *********** deft_funnel_build_initial_sample_set ***********' )
@@ -20,7 +20,8 @@ end
 sampleSet.Y( :, 1 ) = iterate.x;
 if ( strcmp( setting.initial_Y, 'random' ) )
 
-   sampleSet.Y( :, 2:setting.cur_degree ) = -ones( iterate.xdim, setting.cur_degree - 1 ) +                 ...
+   sampleSet.Y( :, 2:setting.cur_degree ) =                                 ...
+       -ones( iterate.xdim, setting.cur_degree - 1 ) +                      ...
        2*rand( iterate.xdim, setting.cur_degree - 1 );
 
    for  j = 2:setting.cur_degree
@@ -60,7 +61,8 @@ elseif strcmp( setting.initial_Y, 'simplex' )
       k = 2 * iterate.xdim + 2;
       for j = 1:iterate.xdim
          for jj = j+1:iterate.xdim
-            sampleSet.Y( :, k ) = 0.5 * ( sampleSet.Y( :, j + 1 ) + sampleSet.Y( :, jj + 1 ) );
+            sampleSet.Y( :, k ) = 0.5 * ( sampleSet.Y( :, j + 1 ) + ...
+                sampleSet.Y( :, jj + 1 ) );
             k = k + 1;
          end
       end
@@ -90,19 +92,21 @@ for i = 1:setting.cur_degree
 
    % Store the new points in X and evaluate f and c at them
    sample.x = sampleSet.Y( :, i );
-   [ sampleSet, sample, evaluations, xstatus, sstatus ] =        ...
-       deft_funnel_augmX_evalfc( f, c, sample, sampleSet, setting,        ...
+   [ sampleSet, sample, evaluations, xstatus, sstatus ] =                   ...
+       deft_funnel_augmX_evalfc( f, c, sample, sampleSet, setting,          ...
        evaluations, xstatus, const.inY, sstatus );
 
    sampleSet.fY( i )    = sampleSet.fX( i );
    sampleSet.cY( :, i ) = sampleSet.cX( :, i );
 
    if ( evaluations.nfeval > setting.maxeval || evaluations.nceval > setting.maxeval )
-       msg  = [' Error: Maximum number of ', int2str( setting.maxeval ), ' function evaluations reached.'];
+       msg  = [' Error: Maximum number of ', int2str( setting.maxeval ),    ...
+               ' function evaluations reached.'];
        % Including fixed variables at return
        if ( iterate.nfix > 0 )
            I  = eye( iterate.xdim + iterate.nfix );
-           iterate.x  = I( :, iterate.indfix ) * setting.lx( iterate.indfix ) + I( :, iterate.indfree ) * iterate.x;
+           iterate.x  = I( :, iterate.indfix ) * ...
+               setting.lx( iterate.indfix ) + I( :, iterate.indfree ) * iterate.x;
        end
        disp(msg)
        poised_model = 0;

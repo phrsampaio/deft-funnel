@@ -40,7 +40,8 @@ indicators.norm_glag = norm( glag );
 if exitc_opt == 0
     indicators.pi_f = trial_pi_f;
 else
-    fprintf('\nWarning: Computation of the optimality measure was unsuccessful. Setting it to the norm of the Lagrangian gradient.\n');
+    fprintf('\nWarning: Computation of the optimality measure was unsuccessful.');
+    fprintf('Setting it to the norm of the Lagrangian gradient.\n');
     indicators.pi_f = indicators.norm_glag;
 end
 indicators.norm_c_s = norm( iterate.c_s );

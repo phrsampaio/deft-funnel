@@ -6,25 +6,25 @@ function [ s, lambda, norms, value, gplus, nfact, neigd, msg ] =            ...
 % Moré-Sorensen algorithm subject to bound constraints.
 %
 % Input: 
-%   - g        : the model's gradient
-%   - H        : the model's Hessian
+%   - g        : model's gradient
+%   - H        : model's Hessian
 %   - lb       : lower bounds on the step
 %   - ub       : upper bounds on the step
-%   - Delta    : the trust-region's radius
-%   - eps_D    : the accuracy required on the equation ||s|| = Delta for a
+%   - Delta    : trust-region's radius
+%   - eps_D    : accuracy required on the equation ||s|| = Delta for a
 %                boundary solution
-%   - stratLam : the strategy to adjust lambda to find an active bound
+%   - stratLam : strategy to adjust lambda to find an active bound
 %                (1 - Newtons method, 0 - bisection method)
 %
 % Output:
-%   - s        : the trust-region step
-%   - lambda   : the Lagrange multiplier corresponding to the trust-region constraint
-%   - norms    : the norm of s
-%   - value    : the value of the model at the optimal solution
-%   - gplus    : the value of the model's gradient at the optimal solution
-%   - nfact    : the number of Cholesky factorization required
-%   - neigd    : the number of eifenvalue decompositions required
-%   - msg      : an information message
+%   - s        : trust-region step
+%   - lambda   : Lagrange multiplier corresponding to the trust-region constraint
+%   - norms    : norm of s
+%   - value    : value of the model at the optimal solution
+%   - gplus    : value of the model's gradient at the optimal solution
+%   - nfact    : number of Cholesky factorizations required
+%   - neigd    : number of eifenvalue decompositions required
+%   - msg      : information message
 %
 % Dependecies  : deft_funnel_solve_TR_MS
 % Programming  : A. Troeltzsch, S. Gratton, July 2009. 
@@ -361,7 +361,7 @@ while nfree > 0
                if ( (length(ind_u_active) + length(ind_l_active)) ~= 0 )
                   if (verbose>=2)
                      disp(['all components inside the bounds + eps_bound, ' ...
-                     num2str(length(ind_u_active)+length(ind_l_active)) ...
+                     num2str(length(ind_u_active)+length(ind_l_active))     ...
                      ' component/s close to one of its bounds'])
                   end
 

@@ -6,20 +6,20 @@ function [ s, lambda, norms, value, gplus, nfact, neigd, msg, hardcase ] =  ...
 % Moré-Sorensen algorithm.
 %
 % Input: 
-%   - g        : the model's gradient
-%   - H        : the model's Hessian
-%   - Delta    : the trust-region's radius
-%   - eps_D    : the accuracy required on the equation ||s|| = Delta for a
+%   - g        : model's gradient
+%   - H        : model's Hessian
+%   - Delta    : trust-region radius
+%   - eps_D    : accuracy required on the equation ||s|| = Delta for a
 %                boundary solution
 % Output:
-%   - s        : the trust-region step
-%   - lambda   : the Lagrange multiplier corresponding to the trust-region constraint
-%   - norms    : the norm of s
-%   - value    : the value of the model at the optimal solution
-%   - gplus    : the value of the model's gradient at the optimal solution
-%   - nfact    : the number of Cholesky factorization required
-%   - neigd    : the number of eifenvalue decompositions required
-%   - msg      : an information message
+%   - s        : trust-region step
+%   - lambda   : Lagrange multiplier corresponding to the trust-region constraint
+%   - norms    : norm of s
+%   - value    : value of the model at the optimal solution
+%   - gplus    : value of the model's gradient at the optimal solution
+%   - nfact    : number of Cholesky factorizations required
+%   - neigd    : number of eigenvalue decompositions required
+%   - msg      : information message
 %   - hardcase : 0 or 1
 %
 %  Dependencies: -
@@ -160,8 +160,8 @@ else
          sfound = 1;
          norms  = norm( s );
          if ( verbose )
-            disp( [ ' deft_funnel_solve_TR_MS (',int2str(i),'): ||s|| = ', num2str( norms ), ...
-                       ' Delta  = ', num2str( Delta ) ] )
+            disp( [ ' deft_funnel_solve_TR_MS (',int2str(i),'): ||s|| = ',  ...
+                num2str( norms ), ' Delta  = ', num2str( Delta ) ] )
          end
 
          % Test for successful termination.

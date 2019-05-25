@@ -48,6 +48,7 @@ if ( norm_soc <= Delta )
     iterate_soc.x = iterate_plus.x + n_xsoc ;
     iterate_soc.s = iterate_plus.s + n_ssoc ;
     
+    % Error message in case of evaluation failure
     error_msg = [ ' Possible causes:\n', ...
               ' (1) Hidden constraint: your black-box function might not',  ...
               ' be able to be evaluated at that point.\n',                  ...
@@ -161,7 +162,7 @@ if ( norm_soc <= Delta )
     iterate_soc.c_s = iterate_soc.ceval - iterate_soc.s;
     vsoc = 0.5 * ( iterate_soc.c_s.' * iterate_soc.c_s );
 
-    rho = ( iterate.feval - iterate_soc.feval + setting.rho_eps ) / ...
+    rho = ( iterate.feval - iterate_soc.feval + setting.rho_eps ) /         ...
           ( delta_f + setting.rho_eps );
 
     if ( rho >= setting.eta1 && vsoc <= vmax )

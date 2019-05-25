@@ -1,6 +1,6 @@
 function derivatives = deft_funnel_compute_derivatives( models, sampleSet, iterate )
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the derivatives of the surrogate models.
 %
 % Input:
@@ -10,7 +10,7 @@ function derivatives = deft_funnel_compute_derivatives( models, sampleSet, itera
 %
 % Output:
 %   - derivatives : struct of the derivatives at the current iterate
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Gradient and hessian of the objective function
 gfx = deft_funnel_gradP( models.f, iterate.x );
