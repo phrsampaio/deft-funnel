@@ -4,7 +4,8 @@ disp('--------------------------------------------------------------------------
 disp('Loading local startup.m ...');
 disp('--------------------------------------------------------------------------------------')
 
-fprintf('\tAdding current directory (including subfolders) to the path ...');
+cd ..
+fprintf('\tAdding deft-funnel directory (including subfolders) to the path ...');
 
 disp(' ')
 disp(pwd)
