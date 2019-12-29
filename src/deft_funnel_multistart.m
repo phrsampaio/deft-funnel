@@ -57,10 +57,8 @@ total_eval = 0;             % total number of evaluations
 f_global_optimum = NaN;     % known objective function value of the global optimum
 nb_global_found = 0;        % number of times the global optimum was found
 nb_local_searches = 0;      % number of local searches run
-maxeval = 400*n;            % maximum number of simulations (budget)
+maxeval = 5000*n;           % maximum number of simulations (budget)
 maxeval_ls = maxeval*0.7;   % maximum number of simulations per local search
-%maxeval = 100;              % maximum number of simulations (budget)
-%maxeval_ls = 100;           % maximum number of simulations per local search
 tol_feas = 1.0e-4;          % tolerance for feasibility
 tol_conv = 1.0e-4;          % tolerance for declaring convergence based on the 
                             % distance to the known global optimum (not

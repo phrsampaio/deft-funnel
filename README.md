@@ -73,14 +73,20 @@ Call DEFT-FUNNEL at the Matlab command window by typing:
 
 * *nb_cons_h*    : number of white-box constraints (bound constraints not included)
 
-*IMPORTANT*
+**IMPORTANT**
+
+The output of dev_f must be a cell array containing two cells, one for each component below: 
+
+* gf             : the gradient of 'f' with dimensions 'n' x 1.
+
+* Hf             : the hessian matrix with dimensions 'n' x 'n'.
 
 The output of dev_h must be a cell array containing two cells, one for each component below: 
 
-* Jh             : the Jacobian matrix of h with dimensions nb_cons_h x n
+* Jh             : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
 
 * Hh             : a matrix containing the hessians of each constraint put 
-side by side, i.e., a matrix with dimensions n x (nb_cons_h*n).
+side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h'*'n').
 
 **Optional input:**
 
@@ -201,8 +207,8 @@ run_deft_funnel_single_bb_test_prob(nprob)
 ```
 where 'nprob' is a number from 1 to 23.
 
-The files run_deft_funnel_all_bb_test_probs.m and 
-run_deft_funnel_single_bb_test_prob.m make use of 6 other files that
+The files 'run_deft_funnel_all_bb_test_probs.m' and 
+'run_deft_funnel_single_bb_test_prob.m' make use of 6 other files that
 describe the test problems:
 1. deft_funnel_problem_init.m - entry parameters, 
 2. deft_funnel_problem_obj.m - objective function,
@@ -211,8 +217,8 @@ describe the test problems:
 5. deft_funnel_problem_dev_f.m - derivatives of the objective function.
 6. deft_funnel_problem_dev_h.m - derivatives of the white-box constraints.
 
-The file deft_funnel_problem_init.m also defines if a constraint in 
-deft_funnel_problem_cons_c.m and deft_funnel_problem_cons_h.m is an equality or 
+The file 'deft_funnel_problem_init.m' also defines if a constraint in 
+'deft_funnel_problem_cons_c.m' and 'deft_funnel_problem_cons_h.m' is an equality or 
 an inequality through the lower bounds 'ls' and the upper bounds 'us'.
 
 # DEFT-FUNNEL with multistart
@@ -242,6 +248,21 @@ deft_funnel_multistart(@f, @c, @h, @dev_f, @dev_h, n, nb_cons_c, nb_cons_h)
 * *nb_cons_h*    : number of white-box constraints (bound constraints not included)
 
 No starting point is required from the user in the multistart case.
+
+**IMPORTANT**
+
+The output of 'dev_f' must be a cell array containing two cells, one for each component below: 
+
+* gf             : the gradient of 'f' with dimensions 'n' x 1.
+
+* Hf             : the hessian matrix with dimensions 'n' x 'n'.
+
+The output of 'dev_h' must be a cell array containing two cells, one for each component below: 
+
+* Jh             : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
+
+* Hh             : a matrix containing the hessians of each constraint put 
+side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h'*'n').
 
 **Optional input:**
 
@@ -371,7 +392,7 @@ where 'nprob' is a number from 1 to 23.
 ## Grey-box test problems
 
 The 5 grey-box test problems included here were constructed from 
-the BB test problems either by making the objective function white box or  
+the BB test problems either by making the objective function white box or 
 by transforming some of the BB constraints into white boxes. They are found 
 at the directory 'testset/greybox'. 
 
@@ -384,19 +405,19 @@ within the 'testset' directory.
 Two of the 5 test problems available are:
 
 * Problem HS21 with the objective function as white box (see files 
-problem_greybox_hs21_obj.m, problem_greybox_hs21_cons_c.m and 
-problem_greybox_hs21_obj_dev.m):
+'problem_greybox_hs21_obj.m', 'problem_greybox_hs21_cons_c.m' and 
+'problem_greybox_hs21_dev_f.m'):
 ```
 [x, fx, mu, indicators, evaluations, iterate, exit_algo] =                  ...
 deft_funnel(@problem_greybox_hs21_obj, @problem_greybox_hs21_cons_c,        ...
-[], @problem_greybox_hs21_obj_dev, [], [-1 -1], 1, 0, 'lsbounds', 0,        ...
+[], @problem_greybox_hs21_dev_f, [], [-1 -1], 1, 0, 'lsbounds', 0,        ...
 'usbounds', Inf, 'lxbounds', [2 -50], 'uxbounds', [50 50],                  ...
 'type_f', 'WB')
 ```
 
 * Problem HS23 with some of the constraints as white boxes (see files 
-problem_greybox_hs23_obj.m, problem_greybox_hs23_cons_c.m, 
-problem_greybox_hs23_cons_h.m and problem_greybox_hs23_dev_h.m):
+'problem_greybox_hs23_obj.m', 'problem_greybox_hs23_cons_c.m', 
+'problem_greybox_hs23_cons_h.m' and 'problem_greybox_hs23_dev_h.m'):
 ```
 [x, fx, mu, indicators, evaluations, iterate, exit_algo] =                  ...
 deft_funnel(@problem_greybox_hs23_obj, @problem_greybox_hs23_cons_c,        ...
