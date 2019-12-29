@@ -1,4 +1,4 @@
-function P = deft_funnel_computeP( sampleSet, funY, setting )
+function P = deft_funnel_computeP(sample_set, funY, setting)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the polynomial P, where P is then represented by a row vector
@@ -14,9 +14,9 @@ function P = deft_funnel_computeP( sampleSet, funY, setting )
 % etc.
 %
 % Input:
-%   - sampleSet : struct of the sample set
-%   - funY      : values of the interpolated function at the points in Y
-%   - setting   : struct of parameters
+%   - sample_set : struct of the sample set
+%   - funY       : values of the interpolated function at the points in Y
+%   - setting    : struct of parameters
 %
 % Output:
 %
@@ -26,10 +26,10 @@ function P = deft_funnel_computeP( sampleSet, funY, setting )
 % Called by     : deft_funnel_build_models
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[ n , p1 ] = size(sampleSet.Y);
-q = ( ( n + 1 ) * ( n + 2 ) ) / 2;
+[n , p1] = size(sample_set.Y);
+q = ((n+1)*(n+2))/2;
 
-if ( setting.whichmodel == 3 && p1 < q )
+if (setting.whichmodel == 3 && p1 < q)
 
    % For underdetermined regression model, use min l2-norm model
    setting.whichmodel = 2;
@@ -38,23 +38,23 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-if ( setting.whichmodel == 0 )
+if (setting.whichmodel == 0)
 
    % Build (sub-basis) model (p1 = q) 
-   % (sampleSet.QZ and sampleSet.RZ are the factors of Z = M')
+   % (sample_set.QZ and sample_set.RZ are the factors of Z = M')
    warning off
-   P = ( sampleSet.QZ * ( sampleSet.RZ' \ funY' ) )';
+   P = (sample_set.QZ * (sample_set.RZ' \ funY'))';
 
-elseif ( setting.whichmodel == 1 )
+elseif (setting.whichmodel == 1)
 
    % Build mixed model: Minimum Frobenius norm model (p1 <= q)
    % and l2-norm model (p1 == n+1 or p1 == q)
-   if ( p1 == n+1 || p1 == q )
+   if (p1 == n+1 || p1 == q)
 
       warning off
-      P(1:p1) = ( sampleSet.RZ \ ( sampleSet.QZ' * funY' ) )';
+      P(1:p1) = (sample_set.RZ \ (sample_set.QZ' * funY'))';
 
-      if ( p1 == n+1 )
+      if (p1 == n+1)
          P(n+2:q) = 0;
       end
 
@@ -65,46 +65,46 @@ elseif ( setting.whichmodel == 1 )
       % (QZ and RZ are the factors of F = [MQMQ' ML; ML' 0])
 
       % Compute right-hand side with function values and zero
-      rhs = [ funY zeros(1,n+1) ];
+      rhs = [funY zeros(1,n+1)];
 
       warning off
-      mualpha  = ( sampleSet.RZ \ ( sampleSet.QZ' * rhs' ) )';
+      mualpha  = (sample_set.RZ \ (sample_set.QZ' * rhs'))';
 
       % Constant and linear part of P
-      P(1:n+1) = mualpha( p1+1: p1+n+1 )';
+      P(1:n+1) = mualpha(p1+1: p1+n+1)';
 
       % Quadratic part of P
-      M        = deft_funnel_evalZ( sampleSet.Y, q )';
-      P(n+2:q) = M( :, n+2 : q )' * mualpha( 1: p1 )';
+      M        = deft_funnel_evalZ(sample_set.Y, q)';
+      P(n+2:q) = M(:, n+2 : q)' * mualpha(1: p1)';
 
    end
 
-elseif ( setting.whichmodel == 2 )
+elseif (setting.whichmodel == 2)
     
    % Minimum L2 norm model (p1 <= q)
-   % (sampleSet.QZ and sampleSet.RZ are the factors of Z = M')
+   % (sample_set.QZ and sample_set.RZ are the factors of Z = M')
    % Take pseudo-inverse for underdetermined system because the result
    % is different from using backslash-operator
-   if ( p1 < q )
+   if (p1 < q)
 
       warning off
-      P        = ( sampleSet.QZ * ( pinv(sampleSet.RZ') * funY' ) )';
+      P = (sample_set.QZ * (pinv(sample_set.RZ') * funY'))';
 
    else
 
       warning off
-      P        = ( sampleSet.QZ * ( sampleSet.RZ' \ funY' ) )';
+      P = (sample_set.QZ * (sample_set.RZ' \ funY'))';
 
    end
 
-elseif ( setting.whichmodel == 3 )
+elseif (setting.whichmodel == 3)
     
    % Build Regression model (p1 >= q)
-   % (sampleSet.QZ and sampleSet.RZ are the factors of Z = M)
+   % (sample_set.QZ and sample_set.RZ are the factors of Z = M)
    % Take pseudo-inverse for solving the system because the result
    % is different from using backslash-operator (except for p1==q)
    warning off
-   P        = ( pinv(sampleSet.RZ) * sampleSet.QZ' * funY' )';
+   P = (pinv(sample_set.RZ) * sample_set.QZ' * funY')';
    
 end
 

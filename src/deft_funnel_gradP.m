@@ -1,4 +1,4 @@
-function g = deft_funnel_gradP( P, x  )
+function g = deft_funnel_gradP(P, x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the gradient of the polynomial P at x, where P is represented by
@@ -24,35 +24,35 @@ function g = deft_funnel_gradP( P, x  )
 % (This version 30 IV 2009)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-n  = length( x );
-p1 = length( P );
+n  = length(x);
+p1 = length(P);
 
 % First-order terms in the polynomial
-ng        = min( n, p1-1 );
-g         = zeros( n, 1 );
-g( 1:ng ) = P( 2:ng+1 );
+ng        = min(n, p1-1);
+g         = zeros(n, 1);
+g(1:ng) = P(2:ng+1);
 
 % Second-order terms
 nquad = p1 - n - 1;
-if( nquad > 0 )
+if(nquad > 0)
 
     % Diagonal
-    ndiag      = min( nquad, n );
-    g(1:ndiag) = g(1:ndiag) + P( n+2:n+1+ndiag )'.*x( 1:ndiag );
+    ndiag      = min(nquad, n);
+    g(1:ndiag) = g(1:ndiag) + P(n+2:n+1+ndiag)'.*x(1:ndiag);
     nquad      = nquad - ndiag;
 
     % Subdiagonals
-    if ( nquad > 0 )
+    if (nquad > 0)
        k = 2 * n + 1;
        for i = 1:n-1
-          nsd = min( n-i, nquad );
-          if ( nsd > 0 )
-             g( i+1:i+nsd ) = g( i+1:i+nsd ) + P( k+1:k+nsd )' .* x( 1:nsd );
-             g( 1:nsd )     = g( 1:nsd )     + P( k+1:k+nsd )' .* x( i+1:i+nsd );
+          nsd = min(n-i, nquad);
+          if (nsd > 0)
+             g(i+1:i+nsd) = g(i+1:i+nsd) + P(k+1:k+nsd)' .* x(1:nsd);
+             g(1:nsd)     = g(1:nsd)     + P(k+1:k+nsd)' .* x(i+1:i+nsd);
              k     = k + nsd;
              nquad = nquad - nsd;
           end
-          if ( nquad == 0 )
+          if (nquad == 0)
              break;
           end
        end

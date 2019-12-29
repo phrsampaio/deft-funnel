@@ -1,6 +1,5 @@
-function [ xp, res, free, atlb, atub ] = ...
-           deft_funnel_blls_spwmin( x, d, A, g, res, lb, ub, free,      ...
-           atlb, atub, verbose )
+function [xp, res, free, atlb, atub] =  deft_funnel_blls_spwmin(x, d, A, g, ...
+    res, lb, ub, free, atlb, atub, verbose)
        
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Part of the BLLS solver. See main file 'deft_funnel_blls_exp.m'.
@@ -30,13 +29,13 @@ for k = 0:n
    lk = g(free)'*d(free);
 
    % Print information on the new point, if requested
-   if ( verbose > 1 )
-      fprintf( '       %4d             %+.4e  %+.4e %4d %4d %4d\n', ...
-               k, qp, lk, lfree, latlb, latub )
+   if (verbose > 1)
+      fprintf('       %4d             %+.4e  %+.4e %4d %4d %4d\n', ...
+              k, qp, lk, lfree, latlb, latub)
    end
 
    % Check for termination is the slope is non-negative
-   if ( lk >= -epsconv )
+   if (lk >= -epsconv)
       break
    end
 
@@ -45,7 +44,7 @@ for k = 0:n
    if ( k == 0 )
       Ad = A(1:m,free)*d(free);
    else
-      if ( length(natb) > 0 )
+      if (length(natb) > 0)
          Ad = Ad - A(1:m,natb)*d(natb);
       end
    end
@@ -55,10 +54,10 @@ for k = 0:n
    % Restrict the step the maximal one maintaining feasibility
    for kf = 1:length(free)
       kk = free(kf);
-      if ( d(kk) >= epsdzer )
-         ak = min( ak, ( ub(kk) - xp(kk) ) / d(kk) );
-      elseif ( d(kk) <= - epsdzer )
-         ak = min( ak, ( lb(kk) - xp(kk) ) / d(kk) );
+      if (d(kk) >= epsdzer)
+         ak = min(ak, (ub(kk) - xp(kk)) / d(kk));
+      elseif (d(kk) <= - epsdzer)
+         ak = min( ak, (lb(kk) - xp(kk)) / d(kk));
       end
    end
 
@@ -73,10 +72,10 @@ for k = 0:n
    % the current active set
    natlb     = free(find(abs(xp(free)-lb(free))<= epsfeas));
    natub     = free(find(abs(xp(free)-ub(free))<= epsfeas));
-   natb      = [ natlb natub ];
-   atlb      = [ atlb natlb ];
-   atub      = [ atub natub ];
-   atb       = [ atlb atub ];
+   natb      = [natlb natub];
+   atlb      = [atlb natlb];
+   atub      = [atub natub];
+   atb       = [atlb atub];
    free      = inds;
    free(atb) = [];
    latlb     = length(atlb);

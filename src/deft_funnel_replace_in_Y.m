@@ -1,4 +1,4 @@
-function sampleSet = deft_funnel_replace_in_Y( sampleSet, ynew, j, setting )
+function sample_set = deft_funnel_replace_in_Y(sample_set, ynew, j, setting)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Updates the interpolation set for a transformation of Y in Yplus where 
@@ -6,20 +6,20 @@ function sampleSet = deft_funnel_replace_in_Y( sampleSet, ynew, j, setting )
 % accordingly.
 %
 % Input:
-%   - sampleSet : struct of the sample set
-%   - ynew      : the vector hich is to replace Y(:,j) in the interpolation set
-%   - j         : the index of the interpolation point to be replaced
-%   - setting   : struct of parameters
+%   - sample_set : struct of the sample set
+%   - ynew       : the vector hich is to replace Y(:,j) in the interpolation set
+%   - j          : the index of the interpolation point to be replaced
+%   - setting    : struct of parameters
 %
 % Output:
-%   - sampleSet : updated struct of the sample set
+%   - sample_set : updated struct of the sample set
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Replace new point in Y
-sampleSet.Y( :, j ) = ynew;
+sample_set.Y(:, j) = ynew;
 
 % Compute new factorization
-sampleSet = deft_funnel_build_QR_of_Y( sampleSet, setting );
+sample_set = deft_funnel_build_QR_of_Y(sample_set, setting);
 
 end % end of deft_funnel_replace_in_Y
 

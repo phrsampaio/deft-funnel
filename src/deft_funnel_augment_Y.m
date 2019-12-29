@@ -1,4 +1,4 @@
-function [ sampleSet, pY ] = deft_funnel_augment_Y( sampleSet, Ynew, setting )
+function [sample_set, pY] = deft_funnel_augment_Y(sample_set, Ynew, setting)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Augments the interpolation set by adding new point(s). This assumes 
@@ -7,28 +7,28 @@ function [ sampleSet, pY ] = deft_funnel_augment_Y( sampleSet, Ynew, setting )
 % increased by the number of columns in Ynew.
 %
 % Input:
-%   - sampleSet : struct of the sample set
-%   - Ynew      : new point(s)
-%   - setting   : struct of parameters
+%   - sample_set : struct of the sample set
+%   - Ynew       : new point(s)
+%   - setting    : struct of parameters
 %
 % Output:
-%   - sampleSet : updated struct of the sample set
-%   - pY        : update number of sample points in Y
+%   - sample_set : updated struct of the sample set
+%   - pY         : update number of sample points in Y
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[ n, pY ] = size( sampleSet.Y );
+[n, pY] = size(sample_set.Y);
 
-if ( ( pY >= ( ( n + 1 ) * ( n + 2 ) ) / 2 ) && ( setting.whichmodel ~= 3 ) )
+if ((pY >= ((n + 1) * (n + 2))/2) && (setting.whichmodel ~= 3))
 
-   disp( ' === augment_Y: warning!!! The interpolation is already fully quadratic!')
-   disp( '     Ignoring augmentation...')
+   disp(' === augment_Y: warning!!! The interpolation is already fully quadratic!')
+   disp('     Ignoring augmentation...')
 
 else
 
-   sampleSet.Y = [ sampleSet.Y Ynew ];
-   pY = pY + size( Ynew, 2 );
+   sample_set.Y = [sample_set.Y Ynew];
+   pY = pY + size(Ynew, 2);
    
-   sampleSet = deft_funnel_build_QR_of_Y( sampleSet, setting );
+   sample_set = deft_funnel_build_QR_of_Y(sample_set, setting);
 
 end
 

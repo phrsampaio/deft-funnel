@@ -1,4 +1,4 @@
-function value = deft_funnel_evalP( P, x )
+function value = deft_funnel_evalP(P, x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the value of the polynomial P at x, where P is represented by
@@ -24,5 +24,5 @@ function value = deft_funnel_evalP( P, x )
 % Called by    : deft_funnel_evalL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-value = P * deft_funnel_evalZ( x, size( P, 2 ) );
+value = P * deft_funnel_evalZ(x, size(P, 2));
 

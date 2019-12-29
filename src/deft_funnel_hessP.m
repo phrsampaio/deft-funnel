@@ -1,4 +1,4 @@
-function H = deft_funnel_hessP( P, x )
+function H = deft_funnel_hessP(P, x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the Hessian of the polynomial P at x, where P is represented by
@@ -26,37 +26,37 @@ function H = deft_funnel_hessP( P, x )
 % (This version 22 VI 2009)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-n     = length( x );
-p1    = length( P );
+n     = length(x);
+p1    = length(P);
 nquad = p1 - n - 1;
 
-if( nquad > 0 )
+if(nquad > 0)
 
     % Diagonal
-    ndiag = min( nquad, n );
-    H     = diag( [ P( n+2:n+1+ndiag ) zeros( 1, n-ndiag )] );
+    ndiag = min(nquad, n);
+    H     = diag([P(n+2:n+1+ndiag) zeros(1, n-ndiag)]);
     nquad = nquad - ndiag;
 
     % Subdiagonals
-    if ( nquad > 0 )
+    if (nquad > 0)
        k = 2*n+1;
        for i = 1:n-1
-          nsd = min( n-i, nquad);
-          if ( nsd > 0 )
+          nsd = min(n-i, nquad);
+          if (nsd > 0)
               for j = 1:nsd
-                H( i+j, j ) = P( k+j ); 
-                H( j, i+j ) = P( k+j ); 
+                H(i+j, j) = P(k+j); 
+                H(j, i+j) = P(k+j); 
               end
               k = k + nsd;
               nquad = nquad - nsd;
           end
-          if ( nquad == 0 )
+          if (nquad == 0)
              break;
           end
        end
     end
 else
-    H = zeros( n, n );
+    H = zeros(n, n);
 end
 
 end % end of deft_funnel_hessP

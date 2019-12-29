@@ -1,4 +1,4 @@
-function Z = deft_funnel_evalZ( X, q )
+function Z = deft_funnel_evalZ(X, q)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Computes the matrix Z(X), where X is a matrix whose columns contains 
@@ -26,28 +26,28 @@ function Z = deft_funnel_evalZ( X, q )
 % (This version 12 IV 2010)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[ n, m ] = size( X );             % [ dimension of the space, number of points in X ]
-nlin     = min( n+1, q );         % number of constant and linear terms
-nquad    = max( 0, q-nlin );      % number of quadratic terms
-nlin     = nlin - 1;              % number of linear terms
-Z        = zeros( q, m );
+[n, m] = size(X);             % [ dimension of the space, number of points in X ]
+nlin   = min(n+1, q);         % number of constant and linear terms
+nquad  = max(0, q-nlin);      % number of quadratic terms
+nlin   = nlin - 1;              % number of linear terms
+Z      = zeros(q, m);
 
-if ( q == 1 )
-   Z = ones( 1, m );                       % constant terms
-elseif ( q <= n+1 )
-   Z = [ ones( 1, m ); X(1:nlin,1:m) ];    % constant and linear
+if (q == 1)
+   Z = ones(1, m);                       % constant terms
+elseif (q <= n+1)
+   Z = [ones(1, m); X(1:nlin,1:m)];    % constant and linear
 else
-   ndiag = min( n, nquad );
-   Z     = [ ones( 1, m ); X(1:n,1:m); 0.5*X(1:ndiag,1:m).^2 ]; % same + diagonal
+   ndiag = min(n, nquad);
+   Z     = [ones(1, m); X(1:n,1:m); 0.5*X(1:ndiag,1:m).^2]; % same + diagonal
    nquad = nquad - ndiag;
-   if ( nquad > 0 )
+   if (nquad > 0)
       for k = 1:n-1                        % the (i+1)-th subdiagonal
-          nsd = min( n-k, nquad );
-          if ( nsd > 0 )
-             Z = [ Z; X(k+1:k+nsd,1:m).*X(1:nsd,1:m) ];
+          nsd = min(n-k, nquad);
+          if (nsd > 0)
+             Z = [Z; X(k+1:k+nsd,1:m).*X(1:nsd,1:m)];
              nquad = nquad - nsd;
           end
-          if ( nquad == 0 )
+          if (nquad == 0)
              break;
           end
       end
