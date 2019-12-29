@@ -75,13 +75,13 @@ Call DEFT-FUNNEL at the Matlab command window by typing:
 
 **IMPORTANT**
 
-The output of dev_f must be a cell array containing two cells, one for each component below: 
+The output of 'dev_f' must be a cell array containing two cells, one for each component below: 
 
 * gf             : the gradient of 'f' with dimensions 'n' x 1.
 
 * Hf             : the hessian matrix with dimensions 'n' x 'n'.
 
-The output of dev_h must be a cell array containing two cells, one for each component below: 
+The output of 'dev_h' must be a cell array containing two cells, one for each component below: 
 
 * Jh             : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
 
