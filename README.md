@@ -1,6 +1,6 @@
 # Derivative-free Trust FUNNEL
 
-This solver searches for the global minimum of grey-box and black-box 
+This solver searches for the global minima of grey-box and black-box 
 optimization problems as defined below:
 
 min f(x)  
@@ -10,8 +10,9 @@ lh <= h(x) <= uh,
 lx <=   x  <= ux,  
 where f(x) might be or not a black box, c(x)=(c_1(x), ..., c_q(x)) are black-box 
 constraint functions, h(x)=(h_1(x), ..., h_l(x)) are white-box constraint functions 
-(i.e. their analytical expressions as well as their derivatives are available) 
-and lc, lh, uc and uh are vectors defining the lower and upper bounds of c(x) and h(x).
+(i.e. their analytical expressions as well as their derivatives are available), 
+lc, lh, uc and uh are vectors defining the lower and upper bounds of c(x) and h(x), 
+and lx and ux are lower and upper bounds on x.
 
 DEFT-FUNNEL builds local (at most fully quadratic) interpolation models
 from known function values for the black-box functions. It solves the 
@@ -45,11 +46,12 @@ Anke Troeltzsch (German Aerospace Center, DLR).
 ## License
 
 This software is released under the MIT license. 
-See `License.txt` for more info.
+See `LICENSE.md` for more info.
 
 # DEFT-FUNNEL without multistart
 
-Call DEFT-FUNNEL at the Matlab command window by typing:
+If global minima are not required and local minima are enough, call DEFT-FUNNEL 
+at the Matlab command window by typing:
 ```
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
 @dev_f, @dev_h, x0, nb_cons_c, nb_cons_h)
@@ -112,7 +114,7 @@ side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h'*'n').
     
     - 3: regression (recommended for noisy functions)
 
-**More parameters:** see deft_funnel_set_parameters.m
+**More parameters:** see 'deft_funnel_set_parameters.m'.
 
 **Output:**
 
@@ -195,7 +197,7 @@ within the 'testset' directory and then
 ```
 >> run_deft_funnel_all_bb_test_probs
 ```
-The BB test problems are found in the directory 'testset/blackbox'. 
+All the BB test problems are found in the directory 'testset/blackbox'. 
 The 'startup' function adds the folder of test problems to the path and 
 'run_deft_funnel_all_bb_test_probs' calls DEFT-FUNNEL within a loop to solve those 
 problems.
@@ -223,7 +225,13 @@ an inequality through the lower bounds 'ls' and the upper bounds 'us'.
 
 # DEFT-FUNNEL with multistart
 
-Call DEFT-FUNNEL at the Matlab command window by typing:
+Running DEFT-FUNNEL with multistart is recommended in the following scenarii:
+* global minima are required;
+* the objective function is known to be multimodal;
+* previous trials with a specific starting point were not successful;
+* the shape of the objective function is unknown but it seems to be nonlinear.
+
+DEFT-FUNNEL with multistart can be called by typing:
 ```
 >> [best_sol, best_feval, best_indicators, total_eval, nb_local_searches, fL] = ...
 deft_funnel_multistart(@f, @c, @h, @dev_f, @dev_h, n, nb_cons_c, nb_cons_h)
