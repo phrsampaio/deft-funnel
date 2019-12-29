@@ -75,7 +75,7 @@ at the Matlab command window by typing:
 
 * *nb_cons_h*    : number of white-box constraints (bound constraints not included)
 
-**IMPORTANT**
+**IMPORTANT**:
 
 The output of 'dev_f' must be a cell array containing two cells, one for each component below: 
 
