@@ -414,7 +414,6 @@ for k = 1:maxit
                 disp(' Trying the next starting point.');
                 exit_algo = 1;
                 evaluations.nfeval = 0;
-                pause
             end
               
             if (exit_algo == 0) % no errors found
@@ -441,8 +440,7 @@ for k = 1:maxit
                 end
             end
            
-            total_eval = total_eval + evaluations.nfeval;
-            
+            total_eval = total_eval + evaluations.nfeval;          
         end
     end
 end

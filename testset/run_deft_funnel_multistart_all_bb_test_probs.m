@@ -8,7 +8,7 @@
 
 clear all
 
-for nprob = 1:22
+for nprob = 1:23
 
     % Initialize test problem
     [x0, n, nb_cons_c, nb_cons_h, ls, us, lx, ux] = deft_funnel_problem_init(nprob);
