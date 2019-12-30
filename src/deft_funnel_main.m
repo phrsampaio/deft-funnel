@@ -31,6 +31,7 @@ mu_iter           = 0;               % Max number of consecutive mu-iterations a
 radius            = setting.epsilon; % Used in the criticality step for repairing Y
 it_type           = '';
 succ              = 0;               % succ = 1 if rho >= setting.eta1 and 0 otherwise
+count_unsucc      = 0;               % Nb of successive unsuccessful iterations
 
 nstep             = [];              % Normal step
 tstep             = [];              % Tangent step
@@ -53,6 +54,13 @@ exit_algo = 0;
 for k = nitold+1:setting.maxit
     
     nit = nit + 1;
+    
+    % Count the number of unsuccessful iterations in a row
+    if (k > 1 && succ == 0)
+        count_unsucc = count_unsucc + 1;
+    else
+        count_unsucc = 0;
+    end
 
     % Update the best feasbile point obtained so far
     
@@ -270,14 +278,16 @@ for k = nitold+1:setting.maxit
     end
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%%%%%%%%%%%%%%%%      POISEDNESS IMPROVEMENT LOOP      %%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%      SAFETY CHECK      %%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Check if it has been trying to improve poisedness through
-    % mu-iterations for a while
-    if ((strcmp(it_type, 'mu-iteration')                                 || ...
-         strcmp(it_type, 'mu-iteration: improving poisedness'))          && ...
-         mu_iter >= 8)
+    % mu-iterations for a while or if the trust-region steps have been
+    % unsuccessful for too long.
+    % TODO: rebuild the interpolation set rather than halting.
+    if (((strcmp(it_type, 'mu-iteration') || ...
+         strcmp(it_type, 'mu-iteration: improving poisedness')) && mu_iter >= 8) || ...
+         (count_unsucc > 10*iterate.xdim))
       
       it_type = 'stopped';
       
