@@ -427,9 +427,10 @@ deft_funnel_multistart(@problem_greybox_hs21_obj,                           ...
 'uxbounds', [50 50], 'type_f', 'WB')
 ```
 
-* Problem HS23 with some of the constraints as white boxes (see files 
-'problem_greybox_hs23_obj.m', 'problem_greybox_hs23_cons_c.m', 
-'problem_greybox_hs23_cons_h.m' and 'problem_greybox_hs23_dev_h.m'):
+* Problem HS23 with the objective function and some of the constraints as 
+white boxes (see files 'problem_greybox_hs23_obj.m', 
+'problem_greybox_hs23_cons_c.m', 'problem_greybox_hs23_cons_h.m', 
+'problem_greybox_hs23_dev_f.m' and 'problem_greybox_hs23_dev_h.m'):
 ```
 [x, fx, mu, indicators, evaluations, iterate, exit_algo] =                  ...
 deft_funnel_multistart(@problem_greybox_hs23_obj,                           ...
