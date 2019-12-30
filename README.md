@@ -100,7 +100,7 @@ side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
 
 * *uxbounds*     : vector of upper bounds for the x variables
 
-* *maxeval*      : maximum number of evaluations (default: 5000*n)
+* *maxeval*      : maximum number of evaluations (default: 500*n)
 
 * *type_f*       : string 'BB' if f is a black box (default) or 'WB' otherwise
 
@@ -189,7 +189,7 @@ deft_funnel(@problem_hs23_obj, @problem_hs23_cons,             ...
 'lxbounds', [-50 -50], 'uxbounds', [50 50])
 ```
 
-A collection of 23 BB test problems may be solved by typing
+A collection of 9 BB test problems may be solved by typing
 ```
 >> startup
 ```
@@ -207,7 +207,7 @@ In order to solve a specific test problem, type
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] =  ...
 run_deft_funnel_single_bb_test_prob(nprob)
 ```
-where 'nprob' is a number from 1 to 23.
+where 'nprob' is a number from 1 to 9.
 
 The files 'run_deft_funnel_all_bb_test_probs.m' and 
 'run_deft_funnel_single_bb_test_prob.m' make use of 6 other files that
@@ -221,7 +221,11 @@ describe the test problems:
 
 The file 'deft_funnel_problem_init.m' also defines if a constraint in 
 'deft_funnel_problem_cons_c.m' and 'deft_funnel_problem_cons_h.m' is an equality or 
-an inequality through the lower bounds 'ls' and the upper bounds 'us'.
+an inequality through the lower bounds 'ls' and the upper bounds 'us'. 
+
+Finally, the test problems defined in 'deft_funnel_problem_init.m' ranging 
+from 10 to 28 are designed for global optimization, so they should be solved 
+with multistart. In particular, the problems 24-28 are of grey-box type.
 
 # DEFT-FUNNEL with multistart
 
