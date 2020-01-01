@@ -1,7 +1,7 @@
 # Derivative-free Trust FUNNEL
 
-This solver searches for the global minima of grey-box and black-box 
-optimization problems as defined below:
+DEFT-FUNNEL is a free open-source solver written in Matlab that searches for 
+the global minima of grey-box and black-box optimization problems as defined below:
 
 min f(x)  
 subject to:   
@@ -24,6 +24,23 @@ In order to find the global minimum, it makes use of a clustering-based
 multistart technique called Multi-Level Single Linkage (MLSL) to select the 
 starting points of the local searches done by the SQP algorithm.
 
+## Table of Contents
+
+* [Derivative-free Trust FUNNEL](#deft-funnel)
+  - [Author and maintainer](#author-maintainer)
+  - [Main references](#mainreferences)
+  - [Contributors](#contributors)
+  - [License](#license)
+* [DEFT-FUNNEL without multistart](#deft-funnel-without-multistart)
+  - [Inputs and outputs for local optimization](#io-local)
+  - [Examples of usage for local optimization](#ex-usage-local)
+  - [Black-box test problems for local optimization](#bbtests-local)
+* [DEFT-FUNNEL with multistart](#deft-funnel-with-multistart)
+  - [Inputs and outputs for global optimization](#io-global)
+  - [Examples of usage for global optimization](#ex-usage-global)
+  - [Black-box test problems for global optimization](#bbtests-global)
+* [Evaluation of objective and black-box constraints from a single black-box call](#single-call)
+
 ## Author and maintainer 
 
 Phillipe Rodrigues Sampaio  
@@ -31,6 +48,11 @@ Veolia Research and Innovation (VERI)
 sampaio.phillipe at gmail.com
 
 ## Main references
+
+Please refer to the following papers if you make use of any part of this code in your research:
+
+* [Ph. R. Sampaio, 
+"DEFT-FUNNEL: an open-source global optimization solver for constrained grey-box and black-box problems", arXiv:1912.12637, 2019.](https://arxiv.org/abs/1912.12637)
 
 * [Ph. R. Sampaio and Ph. L. Toint, 
 "Numerical experience with a derivative-free trust-funnel method for nonlinear optimization problems with general nonlinear constraints", Optimization Methods and Software, 31(3), pages 511-534, 2016.](https://www.tandfonline.com/doi/abs/10.1080/10556788.2015.1135919)
@@ -49,6 +71,8 @@ This software is released under the MIT license.
 See `LICENSE.md` for more info.
 
 # DEFT-FUNNEL without multistart
+
+## Inputs and outpus for local optimization
 
 If global minima are not required and local minima are enough, call DEFT-FUNNEL 
 at the Matlab command window by typing:
@@ -133,7 +157,7 @@ side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
                
 * *exit_algo*    : output signal (0: terminated with success; -1: terminated with errors)
 
-## Examples of usage
+## Examples of usage for local optimization
 
 If 'f' is a black box, 'dev_f' is expected to be an empty array:
 
@@ -168,7 +192,7 @@ must be used in the place of @h and @dev_h; moreover, 'nb_cons_h' must equal 0:
 @dev_f, [], x0, nb_cons_c, 0)
 ```
 
-## Black-box test problems
+## Black-box test problems for local optimization
 
 Some of the black-box (BB) test problems included in this package are:
 
@@ -228,6 +252,8 @@ from 10 to 28 are designed for global optimization, so they should be solved
 with multistart. In particular, the problems 24-28 are of grey-box type.
 
 # DEFT-FUNNEL with multistart
+
+## Inputs and outpus for global optimization
 
 Running DEFT-FUNNEL with multistart is recommended in the following scenarii:
 * global minima are required;
@@ -318,13 +344,13 @@ side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
 
 * *fL*                : objective function values of all local minima found
 
-## Examples of usage
+## Examples of usage for global optimization
 
 See the examples for the case without multistart as the only difference 
 is that the user must pass the number of decision variables rather
 than the starting point as input.
 
-## Black-box test problems
+## Black-box test problems for global optimization
 
 A collection of well-known test problems for constrained global optimization 
 are included in this package. In the examples below, all the functions are 
@@ -401,7 +427,7 @@ run_deft_funnel_multistart_single_bb_test_prob(nprob)
 ```
 where 'nprob' is a number from 1 to 23.
 
-## Grey-box test problems
+## Grey-box test problems for global optimization
 
 The 5 grey-box test problems included here were constructed from 
 the BB test problems either by making the objective function white box or 
