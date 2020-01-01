@@ -38,11 +38,11 @@ starting points of the local searches done by the SQP algorithm.
 * [DEFT-FUNNEL without multistart](#deft-funnel-without-multistart)
   - [Inputs and outputs for local optimization](#inputs-and-outputs-for-local-optimization)
   - [Examples of usage for local optimization](#examples-of-usage-for-local-optimization)
-  - [Black-box test problems for local optimization](#blac-box-test-problems-for-local-optimization)
+  - [Black-box test problems for local optimization](#black-box-test-problems-for-local-optimization)
 * [DEFT-FUNNEL with multistart](#deft-funnel-with-multistart)
   - [Inputs and outputs for global optimization](#inputs-and-outputs-for-global-optimization)
   - [Examples of usage for global optimization](#examples-of-usage-for-global-optimization)
-  - [Black-box test problems for global optimization](#blac-box-test-problems-for-global-optimization)
+  - [Black-box test problems for global optimization](#black-box-test-problems-for-global-optimization)
   - [Grey-box test problems for global optimization](#grey-box-test-problems-for-global-optimization)
 * [Evaluation of objective and black-box constraints from a single black-box call](evaluation-of-objective-and-black-box-constraints-from-a-single-black-box-call)
 
