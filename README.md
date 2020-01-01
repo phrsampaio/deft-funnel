@@ -1,5 +1,7 @@
 # Derivative-free Trust FUNNEL
 
+## Introduction
+
 DEFT-FUNNEL is a free open-source solver written in Matlab that searches for 
 the global minima of grey-box and black-box optimization problems as defined below:
 
@@ -26,20 +28,23 @@ starting points of the local searches done by the SQP algorithm.
 
 ## Table of Contents
 
-* [Derivative-free Trust FUNNEL](#deft-funnel)
-  - [Author and maintainer](#author-maintainer)
-  - [Main references](#mainreferences)
+* [Derivative-free Trust FUNNEL](#derivative-free-trust-funnel)
+  - [Introduction](#introduction)
+  - [Table of Contents](#table-of-contents)
+  - [Author and maintainer](#author-and-maintainer)
+  - [Main references](#main-references)
   - [Contributors](#contributors)
   - [License](#license)
 * [DEFT-FUNNEL without multistart](#deft-funnel-without-multistart)
-  - [Inputs and outputs for local optimization](#io-local)
-  - [Examples of usage for local optimization](#ex-usage-local)
-  - [Black-box test problems for local optimization](#bbtests-local)
+  - [Inputs and outputs for local optimization](#inputs-and-outputs-for-local-optimization)
+  - [Examples of usage for local optimization](#examples-of-usage-for-local-optimization)
+  - [Black-box test problems for local optimization](#blac-box-test-problems-for-local-optimization)
 * [DEFT-FUNNEL with multistart](#deft-funnel-with-multistart)
-  - [Inputs and outputs for global optimization](#io-global)
-  - [Examples of usage for global optimization](#ex-usage-global)
-  - [Black-box test problems for global optimization](#bbtests-global)
-* [Evaluation of objective and black-box constraints from a single black-box call](#single-call)
+  - [Inputs and outputs for global optimization](#inputs-and-outputs-for-global-optimization)
+  - [Examples of usage for global optimization](#examples-of-usage-for-global-optimization)
+  - [Black-box test problems for global optimization](#blac-box-test-problems-for-global-optimization)
+  - [Grey-box test problems for global optimization](#grey-box-test-problems-for-global-optimization)
+* [Evaluation of objective and black-box constraints from a single black-box call](evaluation-of-objective-and-black-box-constraints-from-a-single-black-box-call)
 
 ## Author and maintainer 
 
