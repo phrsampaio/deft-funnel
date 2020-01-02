@@ -26,11 +26,11 @@ In order to find the global minimum, it makes use of a clustering-based
 multistart technique called Multi-Level Single Linkage (MLSL) to select the 
 starting points of the local searches done by the SQP algorithm.
 
-## Table of Contents
+## Table of contents
 
 * [Derivative-free Trust FUNNEL](#derivative-free-trust-funnel)
   - [Introduction](#introduction)
-  - [Table of Contents](#table-of-contents)
+  - [Table of contents](#table-of-contents)
   - [Author and maintainer](#author-and-maintainer)
   - [Main references](#main-references)
   - [Contributors](#contributors)
@@ -108,16 +108,18 @@ at the Matlab command window by typing:
 
 The output of 'dev_f' must be a cell array containing two cells, one for each component below: 
 
-* gf             : the gradient of 'f' with dimensions 'n' x 1.
+* *gf*           : the gradient of 'f' with dimensions 'n' x 1.
 
-* Hf             : the hessian matrix with dimensions 'n' x 'n'.
+* *Hf*           : the hessian matrix with dimensions 'n' x 'n'.
 
 The output of 'dev_h' must be a cell array containing two cells, one for each component below: 
 
-* Jh             : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
+* *Jh*           : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
 
-* Hh             : a matrix containing the hessians of each constraint put 
-side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
+* *Hh*           : a matrix containing the hessians of each constraint put 
+side by side, i.e. a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
+
+See some examples in the 'testset/greybox' directory.
 
 **Optional input:**
 
@@ -296,16 +298,18 @@ No starting point is required from the user in the multistart case.
 
 The output of 'dev_f' must be a cell array containing two cells, one for each component below: 
 
-* gf             : the gradient of 'f' with dimensions 'n' x 1.
+* *gf*           : the gradient of 'f' with dimensions 'n' x 1.
 
-* Hf             : the hessian matrix with dimensions 'n' x 'n'.
+* *Hf*           : the hessian matrix with dimensions 'n' x 'n'.
 
 The output of 'dev_h' must be a cell array containing two cells, one for each component below: 
 
-* Jh             : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
+* *Jh*           : the Jacobian matrix of 'h' with dimensions 'nb_cons_h' x 'n'.
 
-* Hh             : a matrix containing the hessians of each constraint put 
-side by side, i.e., a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
+* *Hh*           : a matrix containing the hessians of each constraint put 
+side by side, i.e. a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
+
+See some examples in the 'testset/greybox' directory.
 
 **Optional input:**
 
