@@ -123,9 +123,9 @@ See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' dire
 
 **Optional input:**
 
-* *lsbounds*     : vector of lower bounds for all the constraints (white box and black box)
+* *lsbounds*     : vector of lower bounds for all the constraints (black boxes first, then white boxes)
 
-* *usbounds*     : vector of upper bounds for all the constraints (white box and black box)
+* *usbounds*     : vector of upper bounds for all the constraints (black boxes first, then white boxes)
 
 * *lxbounds*     : vector of lower bounds for the x variables
 
@@ -317,9 +317,9 @@ See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' dire
 
 **Optional input:**
 
-* *lsbounds*          : vector of lower bounds for all the constraints (white box and black box)
+* *lsbounds*          : vector of lower bounds for all the constraints (black boxes first, then white boxes)
 
-* *usbounds*          : vector of upper bounds for all the constraints (white box and black box)
+* *usbounds*          : vector of upper bounds for all the constraints (black boxes first, then white boxes)
 
 * *lxbounds*          : vector of lower bounds for the x variables
 
