@@ -145,7 +145,7 @@ See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' dire
     
     - 3: regression (recommended for noisy functions)
 
-A few examples of usage with optional inputs are give below. Other parameters 
+A few examples of usage with optional inputs are given below. Other parameters 
 can be set directly within 'deft_funnel_set_parameters.m'. 
 
 **Output:**
@@ -361,7 +361,7 @@ See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' dire
 
 If 'f' is a black box, 'dev_f' is expected to be an empty array:
 ```
->> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel_multistart(@f, @c, @h, ...
 [], @dev_h, n, nb_cons_c, nb_cons_h)
 ```
 
@@ -370,27 +370,27 @@ argument 'type_f' as in the example below (by default, type_f='BB').
 In this case, 'dev_f' is expected to be a valid function that computes 
 the derivatives of 'f'.
 ```
->> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel_multistart(@f, @c, @h, ...
 @dev_f, @dev_h, n, nb_cons_c, nb_cons_h, 'type_f', 'WB')
 ```
 
 If there are no black-box constraints but only white-box ones, an empty array 
 must be used in the place of @c and 'nb_cons_c' must equal 0:
 ```
->> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, [], @h, ...
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel_multistart(@f, [], @h, ...
 @dev_f, @dev_h, n, 0, nb_cons_h, 'type_f', 'WB')
 ```
 
 If there are no white-box constraints but only black-box ones, an empty array 
 must be used in the place of @h and @dev_h; moreover, 'nb_cons_h' must equal 0:
 ```
->> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, [], ...
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel_multistart(@f, @c, [], ...
 @dev_f, [], n, nb_cons_c, 0)
 ```
 
 Setting the optional input 'maxeval' to 400 and 'maxeval_ls' to 90:
 ```
->> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel_multistart(@f, @c, @h, ...
 @dev_f, @dev_h, x0, nb_cons_c, nb_cons_h, 'maxeval', 400, 'maxeval_ls', 90)
 ```
 
