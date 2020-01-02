@@ -21,7 +21,7 @@ function f = problem_harley_obj(x)
 % lx = (0, 0, 0, 0, 0, 0, 0, 0, 0)
 % ux = (600, 200, 500, 500, 500, 500, 500, 500, 500)
 %
-% Global optimal sol obtained by the FSA algorithm: 
+% Global optimal sol: 
 % x*    = (600, 0, 300, 0, 300, 0, 300, 0, 3)
 % f(x*) = -600
 %

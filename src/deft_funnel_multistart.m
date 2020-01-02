@@ -242,7 +242,7 @@ for i = 1:2:noptargs
     % Ojective function value of the global optimum known by the user
     elseif (strcmp(varargin{i}, 'f_global_optimum'))
         if (isnumeric(varargin{i+1}))
-            maxeval_ls = varargin{i+1};
+            f_global_optimum = varargin{i+1};
         else
             msg = [' DEFT-FUNNEL GLOBALOPT warning: wrong type of input',   ... 
                    ' for the ojective function value of the global',        ...

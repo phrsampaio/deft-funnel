@@ -20,7 +20,7 @@ function c = problem_WB4_cons(x)
 % lx = (0.125, 0.1, 0.1, 0.1)
 % ux = (10, 10, 10, 10)
 %
-% Global optimal sol obtained by the FSA algorithm: 
+% Global optimal sol: 
 % x*    = (0.20564426101885, 3.47257874213172, 9.03662391018928, 0.20572963979791)
 % f(x*) = 1.7250
 %
