@@ -44,7 +44,7 @@ starting points of the local searches done by the SQP algorithm.
   - [Examples of usage for global optimization](#examples-of-usage-for-global-optimization)
   - [Black-box test problems for global optimization](#black-box-test-problems-for-global-optimization)
   - [Grey-box test problems for global optimization](#grey-box-test-problems-for-global-optimization)
-* [Evaluation of objective and black-box constraints from a single black-box call](evaluation-of-objective-and-black-box-constraints-from-a-single-black-box-call)
+* [Evaluation of objective and black-box constraints from a single black-box call](#evaluation-of-objective-and-black-box-constraints-from-a-single-black-box-call)
 
 ## Author and maintainer 
 
@@ -79,8 +79,8 @@ See `LICENSE.md` for more info.
 
 ## Inputs and outpus for local optimization
 
-If global minima are not required and local minima are enough, call DEFT-FUNNEL 
-at the Matlab command window by typing:
+If global minima are not required and the user has a good initial guess 'x0' for a
+local minimum, DEFT-FUNNEL can be called at the Matlab command window by typing:
 ```
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
 @dev_f, @dev_h, x0, nb_cons_c, nb_cons_h)
@@ -119,7 +119,7 @@ The output of 'dev_h' must be a cell array containing two cells, one for each co
 * *Hh*           : a matrix containing the hessians of each constraint put 
 side by side, i.e. a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
 
-See some examples in the 'testset/greybox' directory.
+See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' directory.
 
 **Optional input:**
 
@@ -145,7 +145,8 @@ See some examples in the 'testset/greybox' directory.
     
     - 3: regression (recommended for noisy functions)
 
-**More parameters:** see 'deft_funnel_set_parameters.m'.
+A few examples of usage with optional inputs are give below. Other parameters 
+can be set directly within 'deft_funnel_set_parameters.m'. 
 
 **Output:**
 
@@ -167,7 +168,6 @@ See some examples in the 'testset/greybox' directory.
 ## Examples of usage for local optimization
 
 If 'f' is a black box, 'dev_f' is expected to be an empty array:
-
 ```
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
 [], @dev_h, x0, nb_cons_c, nb_cons_h)
@@ -177,7 +177,6 @@ If 'f' is a white box, the user must indicate it (type_f='WB') through the input
 argument 'type_f' as in the example below (by default, type_f='BB'). 
 In this case, 'dev_f' is expected to be a valid function that computes 
 the derivatives of 'f'.
-
 ```
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
 @dev_f, @dev_h, x0, nb_cons_c, nb_cons_h, 'type_f', 'WB')
@@ -185,7 +184,6 @@ the derivatives of 'f'.
 
 If there are no black-box constraints but only white-box ones, an empty array 
 must be used in the place of @c and 'nb_cons_c' must equal 0:
-
 ```
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, [], @h, ...
 @dev_f, @dev_h, x0, 0, nb_cons_h, 'type_f', 'WB')
@@ -193,10 +191,15 @@ must be used in the place of @c and 'nb_cons_c' must equal 0:
 
 If there are no white-box constraints but only black-box ones, an empty array 
 must be used in the place of @h and @dev_h; moreover, 'nb_cons_h' must equal 0:
-
 ```
 >> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, [], ...
 @dev_f, [], x0, nb_cons_c, 0)
+```
+
+Setting the optional input 'maxeval' to 300:
+```
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+@dev_f, @dev_h, x0, nb_cons_c, nb_cons_h, 'maxeval', 300)
 ```
 
 ## Black-box test problems for local optimization
@@ -292,7 +295,8 @@ deft_funnel_multistart(@f, @c, @h, @dev_f, @dev_h, n, nb_cons_c, nb_cons_h)
 
 * *nb_cons_h*    : number of white-box constraints (bound constraints not included)
 
-No starting point is required from the user in the multistart case.
+No starting point is required from the user in the multistart case. The number 
+of decision variables is required as input instead.
 
 **IMPORTANT**:
 
@@ -309,7 +313,7 @@ The output of 'dev_h' must be a cell array containing two cells, one for each co
 * *Hh*           : a matrix containing the hessians of each constraint put 
 side by side, i.e. a matrix with dimensions 'n' x ('nb_cons_h' * 'n').
 
-See some examples in the 'testset/greybox' directory.
+See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' directory.
 
 **Optional input:**
 
@@ -355,9 +359,40 @@ See some examples in the 'testset/greybox' directory.
 
 ## Examples of usage for global optimization
 
-See the examples for the case without multistart as the only difference 
-is that the user must pass the number of decision variables rather
-than the starting point as input.
+If 'f' is a black box, 'dev_f' is expected to be an empty array:
+```
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+[], @dev_h, n, nb_cons_c, nb_cons_h)
+```
+
+If 'f' is a white box, the user must indicate it (type_f='WB') through the input 
+argument 'type_f' as in the example below (by default, type_f='BB'). 
+In this case, 'dev_f' is expected to be a valid function that computes 
+the derivatives of 'f'.
+```
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+@dev_f, @dev_h, n, nb_cons_c, nb_cons_h, 'type_f', 'WB')
+```
+
+If there are no black-box constraints but only white-box ones, an empty array 
+must be used in the place of @c and 'nb_cons_c' must equal 0:
+```
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, [], @h, ...
+@dev_f, @dev_h, n, 0, nb_cons_h, 'type_f', 'WB')
+```
+
+If there are no white-box constraints but only black-box ones, an empty array 
+must be used in the place of @h and @dev_h; moreover, 'nb_cons_h' must equal 0:
+```
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, [], ...
+@dev_f, [], n, nb_cons_c, 0)
+```
+
+Setting the optional input 'maxeval' to 400 and 'maxeval_ls' to 90:
+```
+>> [x, fx, mu, indicators, evaluations, iterate, exit_algo] = deft_funnel(@f, @c, @h, ...
+@dev_f, @dev_h, x0, nb_cons_c, nb_cons_h, 'maxeval', 400, 'maxeval_ls', 90)
+```
 
 ## Black-box test problems for global optimization
 
