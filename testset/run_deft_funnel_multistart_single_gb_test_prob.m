@@ -2,7 +2,7 @@ function [best_sol, best_feval, best_indicators, best_iterate, total_eval,  ...
     nb_local_searches, fL] = run_deft_funnel_multistart_single_gb_test_prob(nprob)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Runs DEFT-FUNNEL with multistart (local optimization) on a single 
+% Desc: Runs DEFT-FUNNEL with multistart (global optimization) on a single 
 % grey-box test problem defined in:
 % 1. 'deft_funnel_problem_init.m' (entry parameters),
 % 2. 'deft_funnel_problem_obj.m' (objective function),

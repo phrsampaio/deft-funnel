@@ -1,11 +1,11 @@
 function [x0, n, nb_cons_c, nb_cons_h, ls, us, lx, ux, type_f] = deft_funnel_problem_init(nprob)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Function called by 'run_deft_funnel.m' and used for running DEFT-FUNNEL
+% Desc: Initializes the input parameters for running DEFT-FUNNEL
 % on a collection of test problems. It sets the entry parameters of the
-% test problem and defines if a constraint in 'deft_funnel_problem_cons.m'
-% is an equality or an inequality through the lower bounds 'ls' and 
-% the upper bounds 'us'.
+% test problem and defines if a constraint in 'deft_funnel_problem_cons_c.m'
+% or 'deft_funnel_problem_cons_h.m' is an equality or an inequality through 
+% the lower bounds 'ls' and the upper bounds 'us'.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if (nprob == 1)

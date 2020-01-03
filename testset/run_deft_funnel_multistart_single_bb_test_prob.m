@@ -2,7 +2,7 @@ function [best_sol, best_feval, best_indicators, best_iterate, total_eval,  ...
     nb_local_searches, fL] = run_deft_funnel_multistart_single_bb_test_prob(nprob)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Desc: Runs DEFT-FUNNEL without multistart (local optimization) on a single 
+% Desc: Runs DEFT-FUNNEL without multistart (global optimization) on a single 
 % test problem defined in:
 % 1. 'deft_funnel_problem_init.m' (entry parameters),
 % 2. 'deft_funnel_problem_obj.m' (objective function),

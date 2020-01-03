@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desc: Runs DEFT-FUNNEL with multistart (global optimization) on a small 
-% collection of blakc-box test problems defined in:
+% collection of black-box test problems defined in:
 % 1. 'deft_funnel_problem_init.m' (entry parameters),
 % 2. 'deft_funnel_problem_obj.m' (objective function),
 % 3. 'deft_funnel_problem_cons_c.m' (constraint function(s)).
