@@ -276,8 +276,9 @@ Running DEFT-FUNNEL with multistart is recommended in the following scenarii:
 
 DEFT-FUNNEL with multistart can be called by typing:
 ```
->> [best_sol, best_feval, best_indicators, total_eval, nb_local_searches, fL] = ...
-deft_funnel_multistart(@f, @c, @h, @dev_f, @dev_h, n, nb_cons_c, nb_cons_h)
+>> [best_sol, best_feval, best_indicators, best_iterate, total_eval,        ...
+nb_local_searches, fL] = deft_funnel_multistart(@f, @c, @h, @dev_f,         ...
+@dev_h, n, nb_cons_c, nb_cons_h)
 ```
 
 **Mandatory input:**
