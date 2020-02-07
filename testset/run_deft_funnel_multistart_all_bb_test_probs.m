@@ -25,5 +25,15 @@ for nprob = 1:23
         nb_local_searches, fL] = deft_funnel_multistart(f, c, h,            ...
         dev_f, dev_h, n, nb_cons_c, nb_cons_h, 'lsbounds', ls, 'usbounds',  ...
         us, 'lxbounds', lx, 'uxbounds', ux)
+    
+    % Write results
+    filename = ['log_multistart_blackbox_tesprob_',int2str(nprob),'.txt'];
+    fileID = fopen(filename,'w');
+    fprintf(fileID,'best_fvalue: %4.8f\n', best_feval);
+    fprintf(fileID,'\ntotal_eval: %d\n', total_eval);
+    fprintf(fileID,'\nnb_local_searches: %d\n', nb_local_searches);
+    fprintf(fileID,'\nBest solution:\n');
+    fprintf(fileID,'%12.10f\n', best_sol);
+    fclose(fileID);
 
 end

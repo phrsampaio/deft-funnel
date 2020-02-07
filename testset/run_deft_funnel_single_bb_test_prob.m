@@ -22,4 +22,14 @@ dev_h = [];
     deft_funnel(f, c, h, dev_f, dev_h, x0, nb_cons_c, nb_cons_h,            ...
     'lsbounds', ls, 'usbounds', us, 'lxbounds', lx, 'uxbounds', ux)
 
+
+% Write results
+filename = ['log_singlestart_blackbox_tesprob_',int2str(nprob),'.txt'];
+fileID = fopen(filename,'w');
+fprintf(fileID,'best_fvalue: %4.8f\n', fx);
+fprintf(fileID,'\ntotal_eval: %d\n', evaluations.nfeval);
+fprintf(fileID,'\nBest solution:\n');
+fprintf(fileID,'%12.10f\n', x);
+fclose(fileID);
+
 end
