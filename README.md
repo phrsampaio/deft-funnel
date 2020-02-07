@@ -121,7 +121,7 @@ The output of `dev_h` must be a cell array containing two cells, one for each co
 * `Hh`           : a matrix containing the hessians of each constraint put 
 side by side, i.e. a matrix with dimensions `n` x ( `nb_cons_h` * `n` ).
 
-See some examples of functions 'dev_f' and 'dev_h' in the 'testset/greybox' directory.
+See some examples of functions `dev_f` and `dev_h` in the `testset/greybox` directory.
 
 **Optional input:**
 
@@ -175,7 +175,7 @@ If `f` is a black box, `dev_f` is expected to be an empty array:
 [], @dev_h, x0, nb_cons_c, nb_cons_h)
 ```
 
-If `f` is a white box, the user must indicate it, `type_f='WB'`, through the input 
+If `f` is a white box, the user must indicate it through the input 
 argument `type_f` as in the example below. By default, `type_f='BB'`. 
 In this case, `dev_f` is expected to be a valid function that computes 
 the derivatives of `f`.
@@ -371,7 +371,7 @@ nb_local_searches, fL] = deft_funnel_multistart(@f, @c, @h,                 ...
 [], @dev_h, n, nb_cons_c, nb_cons_h)
 ```
 
-If `f` is a white box, the user must indicate it, `type_f='WB'`, through the input 
+If `f` is a white box, the user must indicate it through the input 
 argument `type_f` as in the example below. By default, `type_f='BB'`. 
 In this case, `dev_f` is expected to be a valid function that computes 
 the derivatives of `f`.
