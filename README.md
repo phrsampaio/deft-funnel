@@ -355,7 +355,7 @@ See some examples of functions `dev_f` and `dev_h` in the `testset/greybox` dire
 
 * `best_indicators`   : indicators of `best_sol`
 
-* `best_iterate`      : best feasible solution found so far with the budget (should be the same as best_sol when convergence is attained)
+* `best_iterate`      : best feasible solution found so far with the given budget (same as `best_sol` when convergence is attained)
 
 * `total_eval`        : number of evaluations used
 
