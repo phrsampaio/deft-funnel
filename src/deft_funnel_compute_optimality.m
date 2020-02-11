@@ -41,7 +41,7 @@ ub(n+1:n+m) = max(min(ub(n+1:n+m), dus), setting.ls');
 initPoint = zeros(n+m, 1);
 b = zeros(m, 1);
 
-options = optimset('LargeScale','off','Simplex','off','Display','off');
+options = optimset('Display','off');
 [dr, fevallinp, exitflag, output] = linprog(g_n, [], [], J_s, b, ...
     lb', ub', initPoint, options);
 
@@ -57,7 +57,7 @@ if (norm(dr) > 1.0e-14 || exitflag == -2)
 
     if (exitflag == -2) % Try another method if no solution was found
 
-        options = optimset('LargeScale','off','Simplex','on', 'Display','off');
+        options = optimset('Display','off');
         [dr, fevallinp, exitflag, output] = linprog(g_n, [], [],  ...
             J_s, b, lb', ub', initPoint, options);
         if (~isempty(dr))
