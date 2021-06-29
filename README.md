@@ -517,7 +517,7 @@ within the `testset` directory.
 
 Two of the 4 test problems available are:
 
-* Problem GTCD4 with the objective function as white box (see files 
+* Problem GTCD4 with the constraint function as white box (see files 
 `problem_greybox_GTCD4_obj.m`, `problem_greybox_GTCD4_cons_h.m` and 
 `problem_greybox_GTCD4_dev_h.m`):
 ```
