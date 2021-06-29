@@ -1,4 +1,4 @@
-function f = problem_WB4_obj(x)
+function c = problem_greybox_WB4_cons_h(x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Source: Welded Beam Design Problem in "An efficient constraint handling 
@@ -28,6 +28,11 @@ function f = problem_WB4_obj(x)
 % This file is part of the DEFT-FUNNEL software.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-f = 1.10471*x(1)^2*x(2) + 0.04811*x(3)*x(4)*(14.0 + x(2));
+% Set constants
+xmax = 10;
+
+% Define the constraints
+c(1) = (x(1) - x(4))/xmax;
+c(2) = (0.10471*x(1)^2 + 0.04811*x(3)*x(4)*(14.0 + x(2)) - 5.0)/5.0;
 
 end

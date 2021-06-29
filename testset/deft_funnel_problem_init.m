@@ -374,4 +374,17 @@ elseif (nprob == 28)
     ux        = [50 50];
     type_f    = 'WB';
    
+elseif (nprob == 29)
+    
+    % Problem: WB4
+    x0        = [1 1 1 1];
+    n         = 4;
+    nb_cons_c = 4;
+    nb_cons_h = 2;
+    ls        = [-Inf -Inf -Inf -Inf -Inf -Inf];
+    us        = [0 0 0 0 0 0];
+    lx        = [0.125 0.1 0.1 0.1];
+    ux        = [10 10 10 10];
+    type_f    = 'WB';
+   
 end % end of deft_funnel_init

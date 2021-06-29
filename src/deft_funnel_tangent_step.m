@@ -71,13 +71,6 @@ if(norm_n <= setting.kappa_r * Delta)
                 linprog(g_n, [], [], models.derivatives.J_s, b, lb', ub',   ...
                 init_point, options);
 
-            if (exitflag == -2)
-                options = optimset('Display','off');
-                [tstep, fevallinprog, exitflag] =                           ...
-                    linprog(g_n, [], [], models.derivatives.J_s, b, lb',    ...
-                    ub', init_point, options);
-            end
-
             tstep_x = tstep(1:n);
             tstep_s = tstep(n+1:n+m);
 

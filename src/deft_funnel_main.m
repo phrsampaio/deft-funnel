@@ -95,6 +95,7 @@ for k = nitold+1:setting.maxit
     xlist  = [xlist iterate.x];
     trlist = [trlist Delta];
     
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%      SUBSPACE MINIMIZATION STEP      %%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -599,7 +600,16 @@ for k = nitold+1:setting.maxit
         fprintf(' Warning: delta_ft = %.4e\n', delta_ft);
     end
    
-    rho = (iterate.feval-iterate_plus.feval+setting.rho_eps)/(delta_f+setting.rho_eps);
+    gamma_k = setting.rho_eps*max(1,norm(iterate.feval));
+    num_delta = iterate.feval - iterate_plus.feval + gamma_k;
+    den_delta = delta_f + gamma_k;
+    
+    if (norm(num_delta) < setting.rho_eps && ...
+            norm(den_delta) < setting.rho_eps)
+        rho = 1; 
+    else
+        rho = num_delta/den_delta;
+    end
     
     if (rho >= setting.eta1)
         succ = 1;

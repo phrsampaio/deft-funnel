@@ -152,5 +152,10 @@ elseif (nprob == 28)
    % Problem: HS23 (grey box)
    f = problem_greybox_hs23_obj(x);
    
+elseif (nprob == 29)
+   
+   % Problem: WB4 (grey box)
+   f = problem_greybox_WB4_obj(x);
+   
 end
 

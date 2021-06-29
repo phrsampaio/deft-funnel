@@ -1,5 +1,5 @@
 function [best_sol, best_feval, best_indicators, best_iterate, total_eval,   ...
-    nb_local_searches, fL] = deft_funnel_multistart(f, c, h, dev_f,         ...
+    nb_local_searches, fL] = deft_funnel_multistart(f, c, h, dev_f,          ...
     dev_h, n, nb_cons_c, nb_cons_h, varargin)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,7 +40,7 @@ if (~isnumeric(nb_cons_h))
 end
 
 % Initialization
-%rng('shuffle', 'twister');  % seed the random nb generator based on the current time
+rng('shuffle', 'twister');  % seed the random nb generator based on the current time
 L = [];                     % set of local minima found
 fL = [];                    % set of optimal values found
 S = [];                     % set of sample points
@@ -65,6 +65,7 @@ tol_conv = 1.0e-4;          % tolerance for declaring convergence based on the
                             % used if the global optimum is not known a
                             % priori)
 type_f = 'BB';              % 'BB' if f is a black-box and 'WB' otherwise
+                            % Default: 'BB'
 whichmodel = 2;             % Approach to build the surrogate models:
                             % 0 = Subbasis model
                             % 1 = Frobenius-norm model
@@ -72,7 +73,7 @@ whichmodel = 2;             % Approach to build the surrogate models:
                             % 3 = regression (recommended for noisy functions)
 
 % Set the MLSL constants
-nb_of_new_samples = min(20*n, floor(0.1*maxeval));
+nb_of_new_samples = min(20*n, floor(0.40*maxeval)); % number of new samples per MLSL iteration
 sigma = 4;
 kappa = 1;                  % percentage of the best samples to consider
 maxit = 20;                 % number of MLSL iterations
@@ -306,6 +307,7 @@ for k = 1:maxit
     
     % Sample new points and add them to S
     Snew = deft_funnel_multistart_sampling('uniform', n, nb_of_new_samples, lx, ux);
+    
     nbsamples_old = size(S, 2);
     S = [S Snew];
     started_points = [started_points zeros(1, nb_of_new_samples)];
@@ -392,7 +394,7 @@ for k = 1:maxit
             x0 = Sreduced(:,j);
             total_eval = total_eval - 1;
             nb_local_searches = nb_local_searches + 1;
-
+            
             try 
                 
                 % Start local search
@@ -407,7 +409,7 @@ for k = 1:maxit
                     'maxeval', min(maxeval_ls, maxeval - total_eval),       ...
                     'type_f', type_f,                                       ...
                     'whichmodel', whichmodel);
-
+                
             catch
                 disp(' ')
                 disp([' Local search number ', int2str(nb_local_searches), ' FAILED.'])

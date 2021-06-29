@@ -1,4 +1,4 @@
-function f = problem_WB4_obj(x)
+function f = problem_greybox_WB4_obj(x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Source: Welded Beam Design Problem in "An efficient constraint handling 

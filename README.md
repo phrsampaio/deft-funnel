@@ -3,7 +3,7 @@
 ## Introduction
 
 DEFT-FUNNEL is a free open-source solver written in Matlab that searches for 
-the global minima of grey-box and black-box optimization problems as defined below:
+the global minima of constrained grey-box and black-box optimization problems as defined below:
 
 min f(x)  
 subject to:   
@@ -25,6 +25,8 @@ is driven by a funnel bound on the constraint violation.
 In order to find the global minimum, it makes use of a clustering-based 
 multistart technique called Multi-Level Single Linkage (MLSL) to select the 
 starting points of the local searches done by the SQP algorithm.
+
+Please note that this solver does not address unconstrained problems.
 
 ## Table of contents
 
@@ -57,15 +59,19 @@ sampaio.phillipe at gmail.com
 Please refer to the following paper if you make use of any part of this code in your research:
 
 * [Ph. R. Sampaio, 
-"DEFT-FUNNEL: an open-source global optimization solver for constrained grey-box and black-box problems", arXiv:1912.12637, 2019.](https://arxiv.org/abs/1912.12637)
+"DEFT-FUNNEL: an open-source global optimization solver for constrained grey-box and black-box problems", 
+Computational and Applied Mathematics, 40, 2021.](https://link.springer.com/article/10.1007/s40314-021-01562-y)
 
 Other references:
 
 * [Ph. R. Sampaio and Ph. L. Toint, 
-"Numerical experience with a derivative-free trust-funnel method for nonlinear optimization problems with general nonlinear constraints", Optimization Methods and Software, 31(3), pages 511-534, 2016.](https://www.tandfonline.com/doi/abs/10.1080/10556788.2015.1135919)
+"Numerical experience with a derivative-free trust-funnel method for nonlinear 
+optimization problems with general nonlinear constraints", Optimization Methods and Software, 
+31(3), pages 511-534, 2016.](https://www.tandfonline.com/doi/abs/10.1080/10556788.2015.1135919)
 
 * [Ph. R. Sampaio and Ph. L. Toint, 
-"A derivative-free trust-funnel method for equality-constrained nonlinear optimization", Computational Optimization and Applications, 61(1), pages 25-49, 2015.](https://doi.org/10.1007/s10589-014-9715-3)
+"A derivative-free trust-funnel method for equality-constrained nonlinear optimization", 
+Computational Optimization and Applications, 61(1), pages 25-49, 2015.](https://doi.org/10.1007/s10589-014-9715-3)
 
 ## Contributors 
 
@@ -133,7 +139,7 @@ See some examples of functions `dev_f` and `dev_h` in the `testset/greybox` dire
 
 * `uxbounds`     : vector of upper bounds for the `x` variables
 
-* `maxeval`      : maximum number of evaluations (default: 500*n)
+* `maxeval`      : maximum number of evaluations in a local search (default: 500*n)
 
 * `type_f`       : string 'BB' if f is a black box (default) or 'WB' otherwise
 
@@ -329,7 +335,7 @@ See some examples of functions `dev_f` and `dev_h` in the `testset/greybox` dire
 
 * `uxbounds`          : vector of upper bounds for the `x` variables
 
-* `maxeval`           : maximum number of evaluations (default: 5000*n)
+* `maxeval`           : maximum number of evaluations in total (default: 5000*n)
 
 * `maxeval_ls`        : maximum number of evaluations per local search (default: maxeval*0.7)
 

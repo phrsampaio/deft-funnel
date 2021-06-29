@@ -20,12 +20,12 @@ setting.gamma1           = 0.01;           % Lower bound on Delta interval
                                            % (unsuccessful its)
 setting.gamma2           = 0.5;            % Upper bound on Delta interval 
                                            % (unsuccessful its)
-setting.gamma3           = 2;            % Increase in Delta (successful its)
-setting.gamma4           = 8;            % Increase in Delta (very successful its)
+setting.gamma3           = 2;              % Increase in Delta (successful its)
+setting.gamma4           = 3;              % Increase in Delta (very successful its)
 setting.shrink_Delta     = 1;              % Shrink trust-region radius in every 
                                            % unsuccessful iteration. 
                                            % Default: 1 (true)
-setting.shrink_Delta_max = 20*n;           % Max nb of times to shrink on 
+setting.shrink_Delta_max = n;              % Max nb of times to shrink on 
                                            % unsuccesful iterations
 
 %% CRITICALITY
@@ -38,8 +38,8 @@ setting.beta             = 1;              % Ratio between optimality/feasibilit
                                            % criticality step)
 setting.epsilon          = 1.0e-4;         % Optimality/feasibility termination accuracy
 setting.epsilon0         = 1.0e-2;         % Initial gradient accuracy threshold
-setting.maxeval          = 500*n;          % Maximum number of evaluations
-setting.maxit            = 100*setting.maxeval; % Maximum number of iterations
+setting.maxeval          = 500*n;          % Maximum number of evaluations in a local search
+setting.maxit            = 100*setting.maxeval; % Maximum number of iterations in a local search
 setting.stallfact_subsp  = 1.0e-4;         % Termination (stalled) when
                                            % ||d|| or Delta <= epsilon*stallfact*norm(x)
 setting.stallfact_fullsp = 1.0e-4;           
@@ -99,14 +99,16 @@ setting.factor_fmax      = 1.e20;          % The ratio between the upper bound
 setting.fmax             = 1.e25;          % Maximum possible function value. Otherwise,
                                            % it is considered as NaN
 setting.kappa_r          = 0.9;            % Condition to calculate tanget step: 
-                                           %      || n || <= kappa_r * Delta
-setting.kappa_ca         = 1.0e+2;         % For the initialization of vmax
-setting.kappa_cr         = 2.0;            % For the initialization of vmax
+                                           % | n || <= kappa_r * Delta.
+                                           % Default: 0.9
+setting.kappa_ca         = 1.0e+2;         % For the initialization of vmax. 
+                                           % Default: 1.0e+2.
+setting.kappa_cr         = 1.0;            % For the initialization of vmax
 setting.kappa_delta 	 = 0.2;            % Condition to be a f-iteration: 
                                            % delta_f >= kappa_delta*delta_ft
 setting.kappa_ill        = 1e+15;          % Threshold to declare a system matrix 
                                            % as ill-conditioned
-setting.kappa_n          = 1.0e+2;         % Feasibility problem trust region: 
+setting.kappa_n          = 1.0;            % Feasibility problem trust region: 
                                            % ||n_step|| <= min(Delta_c, kappa_n*pi_v)
 setting.kappa_tx1        = 0.9;            % vmax update formula
 setting.kappa_tx2        = 0.5;            % vmax update formula

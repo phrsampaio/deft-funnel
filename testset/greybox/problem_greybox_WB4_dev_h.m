@@ -1,4 +1,4 @@
-function f = problem_WB4_obj(x)
+function output = problem_greybox_WB4_dev_h(x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Source: Welded Beam Design Problem in "An efficient constraint handling 
@@ -28,6 +28,22 @@ function f = problem_WB4_obj(x)
 % This file is part of the DEFT-FUNNEL software.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-f = 1.10471*x(1)^2*x(2) + 0.04811*x(3)*x(4)*(14.0 + x(2));
+% Set constants
+xmax = 10;
+
+% Derivatives of the white-box constraints
+Jh = [1/xmax 0 0 -1/xmax; ...
+      0.10471*2*x(1)/5.0 0.04811*x(3)*x(4)/5.0 ...
+      0.04811*x(4)*(14.0 + x(2))/5.0 0.04811*x(3)*(14.0 + x(2))/5.0];
+Hh1 = [zeros(1,4); zeros(1,4); zeros(1,4); zeros(1,4)];
+
+dx1dx = [0.10471*2/5.0 0 0 0];
+dx2dx = [0 0 0 0];
+dx3dx = [0 0.04811*x(4)/5.0 0 0.04811*(14.0 + x(2))/5.0];
+dx4dx = [0 0.04811*x(2)/5.0 0.04811*x(3)*(14.0 + x(2))/5.0 0];
+    
+Hh2 = [dx1dx; dx2dx; dx3dx; dx4dx];
+Hhlist = [Hh1 Hh2];
+output = {Jh, Hhlist};
 
 end

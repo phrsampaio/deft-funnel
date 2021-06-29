@@ -8,9 +8,22 @@ function [merit_fun_S, cons_viol_S] =                                       ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 nbsamples   = size(S, 2);
+%penalty     = 500000;
 penalty     = 50;
 merit_fun_S = zeros(nbsamples, 1);
 cons_viol_S = zeros(nbsamples, 1);
+
+mean_cS = ones(nb_cons_c,1);
+for j=1:nb_cons_c
+    mean_cS(j) = mean(cS(j,:));
+end
+
+mean_hS = ones(nb_cons_h,1);
+for j=1:nb_cons_h
+    mean_hS(j) = mean(hS(j,:));
+end
+
+mean_fS = mean(fS(:));
 
 for i = 1:nbsamples
     

@@ -152,4 +152,9 @@ elseif (nprob == 28)
    % Problem: HS23 (grey box)
    cons = problem_greybox_hs23_cons_c(x);
    
+elseif (nprob == 29)
+   
+   % Problem: WB4 (grey box)
+   cons = problem_greybox_WB4_cons_c(x);
+   
 end

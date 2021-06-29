@@ -1,9 +1,9 @@
-function f = problem_WB4_obj(x)
+function output = problem_greybox_WB4_dev_f(x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Source: Welded Beam Design Problem in "An efficient constraint handling 
 % method for genetic algorithms", Computer Methods in Applied Mechanics and 
-% Engineering 186, 311–338, 2002, by Deb, K.
+% Engineering 186, 311Â–338, 2002, by Deb, K.
 %
 % Desc: 
 %     - Number of variables: 4
@@ -28,6 +28,16 @@ function f = problem_WB4_obj(x)
 % This file is part of the DEFT-FUNNEL software.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-f = 1.10471*x(1)^2*x(2) + 0.04811*x(3)*x(4)*(14.0 + x(2));
+gf = [1.10471*2*x(1)*x(2)                                              ...
+    1.10471*x(1)^2 + 0.04811*x(3)*x(4)                                 ...
+    0.04811*x(4)*(14.0 + x(2))                                         ...
+    0.04811*x(3)*(14.0 + x(2))]';
+
+dx1dx = [1.10471*2*x(2) 1.10471*2*x(1) 0 0];
+dx2dx = [2*1.10471*x(1) 0 0.04811*x(4) 0.04811*x(3)];
+dx3dx = [0 0.04811*x(4) 0 0.04811*(14.0 + x(2))];
+dx4dx = [0 0.04811*x(3) 0.04811*(14.0 + x(2)) 0];
+Hf = [dx1dx; dx2dx; dx3dx; dx4dx];
+output = {gf, Hf};
 
 end

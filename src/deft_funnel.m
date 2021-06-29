@@ -32,7 +32,7 @@ if (~isnumeric(nb_cons_h))
 end
 
 % Reset the random generator 
-rng('shuffle', 'twister');
+% rng('shuffle', 'twister');
 
 % Make sure the starting point is a column vector
 if (size(x0, 1) == 1 && size(x0, 2) > 1)

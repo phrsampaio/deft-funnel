@@ -26,7 +26,7 @@ if (pos > 0)
     iterate = iterate_plus;
     sample_set.i_xbest = sample_set.nbPoints;
 
-    if (iterType == 2) % c-iteration
+    if (iterType == 2) % z-iteration
         
         % Update vmax
         vmax = max(setting.kappa_tx1 * vmax,                                ...
