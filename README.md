@@ -262,13 +262,15 @@ describe the test problems:
 5. `deft_funnel_problem_dev_f.m`  : derivatives of the objective function.
 6. `deft_funnel_problem_dev_h.m`  : derivatives of the white-box constraints.
 
-The file `deft_funnel_problem_init.m` also defines if a constraint in 
+The file `deft_funnel_problem_init.m` defines if a constraint in 
 `deft_funnel_problem_cons_c.m` and `deft_funnel_problem_cons_h.m` is an equality or 
 an inequality through the lower bounds `ls` and the upper bounds `us`. 
+The lower bounds `lx` and upper bounds `ux` are also defined in 
+`deft_funnel_problem_init.m`.
 
 Finally, the test problems defined in `deft_funnel_problem_init.m` ranging 
-from 10 to 28 are designed for global optimization, so they should be solved 
-with multistart. In particular, the problems 24-28 are of grey-box type.
+from 10 to 27 are designed for global optimization, so they should be solved 
+with multistart. In particular, the problems 24-27 are of grey-box type.
 
 # DEFT-FUNNEL with multistart
 
@@ -494,9 +496,15 @@ nb_local_searches, fL] = run_deft_funnel_multistart_single_bb_test_prob(nprob)
 ```
 where `nprob` is a number from 1 to 23. An associated log file is then written.
 
+As in the local optimmization case, the file `deft_funnel_problem_init.m` defines if a constraint in 
+`deft_funnel_problem_cons_c.m` and `deft_funnel_problem_cons_h.m` is an equality or 
+an inequality through the lower bounds `ls` and the upper bounds `us`. 
+The lower bounds `lx` and upper bounds `ux` are also defined in 
+`deft_funnel_problem_init.m`.
+
 ## Grey-box test problems for global optimization
 
-The 5 grey-box test problems included here were constructed from 
+The 4 grey-box test problems included here were constructed from 
 the BB test problems either by making the objective function white box or 
 by transforming some of the BB constraints into white boxes. They are found 
 at the directory `testset/greybox`. 
@@ -507,30 +515,32 @@ In order to run DEFT-FUNNEL on them, you must type
 ```
 within the `testset` directory. 
 
-Two of the 5 test problems available are:
+Two of the 4 test problems available are:
 
-* Problem HS21 with the objective function as white box (see files 
-`problem_greybox_hs21_obj.m`, `problem_greybox_hs21_cons_c.m` and 
-`problem_greybox_hs21_dev_f.m`):
+* Problem GTCD4 with the objective function as white box (see files 
+`problem_greybox_GTCD4_obj.m`, `problem_greybox_GTCD4_cons_h.m` and 
+`problem_greybox_GTCD4_dev_h.m`):
 ```
 [best_sol, best_feval, best_indicators, best_iterate, total_eval,           ...
-nb_local_searches, fL] = deft_funnel_multistart(@problem_greybox_hs21_obj,  ...
-@problem_greybox_hs21_cons_c, [], @problem_greybox_hs21_dev_f, [],          ...
-2, 1, 0, 'lsbounds', 0, 'usbounds', Inf, 'lxbounds', [2 -50],               ...
-'uxbounds', [50 50], 'type_f', 'WB')
+nb_local_searches, fL] = deft_funnel_multistart(@problem_greybox_GTCD4_obj, ...
+[], @problem_greybox_GTCD4_cons_h, [], @problem_greybox_GTCD4_dev_h,        ...
+4, 0, 1, 'lsbounds', -Inf, 'usbounds', 0, 'lxbounds', [20 1 20 0.1],        ...
+'uxbounds', [50 10 50 60], 'type_f', 'BB')
 ```
 
-* Problem HS23 with the objective function and some of the constraints as 
-white boxes (see files `problem_greybox_hs23_obj.m`, 
-`problem_greybox_hs23_cons_c.m`, `problem_greybox_hs23_cons_h.m`, 
-`problem_greybox_hs23_dev_f.m` and `problem_greybox_hs23_dev_h.m`):
+* Problem SR7 with the objective function and some of the constraints as 
+white boxes (see files `problem_greybox_SR7_obj.m`, 
+`problem_greybox_SR7_cons_c.m`, `problem_greybox_SR7_cons_h.m`, 
+`problem_greybox_SR7_dev_f.m` and `problem_greybox_SR7_dev_h.m`):
 ```
 [best_sol, best_feval, best_indicators, best_iterate, total_eval,           ...
-nb_local_searches, fL] = deft_funnel_multistart(@problem_greybox_hs23_obj,  ...
-@problem_greybox_hs23_cons_c, @problem_greybox_hs23_cons_h,                 ...
-@problem_greybox_hs23_dev_f, @problem_greybox_hs23_dev_h, 2, 2, 3,          ...
-'lsbounds', [0 0 0 0 0], 'usbounds', [Inf Inf Inf Inf Inf],                 ...
-'lxbounds', [-50 -50], 'uxbounds', [50 50], 'type_f', 'WB')
+nb_local_searches, fL] = deft_funnel_multistart(@problem_greybox_SR7_obj,   ...
+@problem_greybox_SR7_cons_c, @problem_greybox_SR7_cons_h,                   ...
+@problem_greybox_SR7_dev_f, @problem_greybox_SR7_dev_h, 7, 9, 2,            ...
+'lsbounds', [-Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf -Inf],       ...
+'usbounds', [0 0 0 0 0 0 0 0 0 0 0],                                        ...
+'lxbounds', [2.6 0.7 17 7.3 7.3 2.9 5],                                     ...
+'uxbounds', [3.6 0.8 28 8.3 8.3 3.9 5.5], 'type_f', 'WB')
 ```
 
 In order to solve a specific grey-box test problem with multistart, type
@@ -538,7 +548,11 @@ In order to solve a specific grey-box test problem with multistart, type
 >> [best_sol, best_feval, best_indicators, best_iterate, total_eval,        ...
 nb_local_searches, fL] = run_deft_funnel_multistart_single_gb_test_prob(nprob)
 ```
-where `nprob` is a number from 24 to 28. An associated log file is then written.
+where `nprob` is a number from 24 to 27. An associated log file is then written.
+
+The type of the objective function (BB or WB) as well as the 
+number of BB and WB constraints of the test problems are defined in 
+the file `deft_funnel_problem_init.m`. 
 
 # Evaluation of objective and black-box constraints from a single black-box call
 

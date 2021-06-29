@@ -310,7 +310,7 @@ elseif (nprob == 23)
    
 elseif (nprob == 24)
 
-    % Problem: GTCD4
+    % Problem: GTCD4 (grey box)
     x0        = [20 5 30 20];
     n         = 4;
     nb_cons_c = 0;
@@ -323,7 +323,7 @@ elseif (nprob == 24)
    
 elseif (nprob == 25)
 
-    % Problem: SR7
+    % Problem: SR7 (grey box)
     x0        = [2.6 0.7 17 7.3 7.3 2.9 5];
     n         = 7;
     nb_cons_c = 9;
@@ -336,7 +336,7 @@ elseif (nprob == 25)
    
 elseif (nprob == 26)
 
-    % Problem: Hesse
+    % Problem: Hesse (grey box)
     %x0        = [1 1 1 0 1 0];
     x0        = [0.177468345583169 0.400230345036942 4.93626491163683 0.0650223791902058 3.82581226100484 7.18570456709047];
     n         = 6;
@@ -350,33 +350,7 @@ elseif (nprob == 26)
    
 elseif (nprob == 27)
 
-    % Problem: HS21
-    x0        = [-1 -1];
-    n         = 2;
-    nb_cons_c = 1;
-    nb_cons_h = 0;
-    ls        = 0.0;
-    us        = Inf;
-    lx        = [2 -50];
-    ux        = [50 50];
-    type_f    = 'WB';
-   
-elseif (nprob == 28)
-
-    % Problem: HS23
-    x0        = [3 1];
-    n         = 2;
-    nb_cons_c = 2;
-    nb_cons_h = 3;
-    ls        = [0 0 0 0 0];
-    us        = [Inf Inf Inf Inf Inf];
-    lx        = [-50 -50];
-    ux        = [50 50];
-    type_f    = 'WB';
-   
-elseif (nprob == 29)
-    
-    % Problem: WB4
+    % Problem: WB4 (grey box)
     x0        = [1 1 1 1];
     n         = 4;
     nb_cons_c = 4;
